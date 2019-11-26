@@ -5,7 +5,7 @@ const github = require('@actions/github');
 
 async function run() {
   const githubContext = github.context;
-  const githubToken = core.getInput('github-token');
+  const githubToken = core.getInput('repo-token');
   const githubClient: GitHub = new GitHub(githubToken);
 
   const titleRegex = new RegExp(core.getInput('title-regex'));
