@@ -1,6 +1,9 @@
-name: 'Container Action Template'
-description: 'Get started with Container actions'
-author: 'GitHub'
+name: 'Pull Request Linter'
+description: 'Ensures your PR title matches a given regex'
+author: 'MorrisonCole'
+branding:
+  icon: 'check'
+  color: 'green'
 inputs: 
   myInput:
     description: 'Input to use'
