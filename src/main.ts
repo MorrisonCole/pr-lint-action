@@ -12,7 +12,7 @@ async function run() {
   const title = githubContext.payload.pull_request.title;
 
   const onFailedRegexComment = core.getInput('on-failed-regex-comment')
-    .replace('%pattern%', titleRegex.source);
+    .replace('%regex%', titleRegex.source);
 
   core.debug(`Title Regex: ${titleRegex}`);
   core.debug(`Title: ${title}`);
