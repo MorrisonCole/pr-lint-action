@@ -9,4 +9,5 @@ jobs:
     steps:
     - uses: morrisoncole/pr-lint-action@v0.1.0-alpha
       with:
+        title-regex: "#EX-[0-9]+"
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
