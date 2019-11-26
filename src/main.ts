@@ -14,10 +14,14 @@ async function run() {
   const onFailedRegexComment = core.getInput('on-failed-regex-comment')
     .replace('%pattern%', titleRegex.source);
 
+  core.debug(`Title Regex: ${titleRegex}`);
+  core.debug(`Title: ${title}`);
+
   try {
     if (!titleRegex.test(title)) {
-      const pr = githubContext.issue;
+      core.setFailed(onFailedRegexComment);
 
+      const pr = githubContext.issue;
       githubClient.pulls.createReview({
         owner: pr.owner,
         repo: pr.repo,
