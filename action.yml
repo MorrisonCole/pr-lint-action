@@ -5,9 +5,14 @@ branding:
   icon: 'check'
   color: 'green'
 inputs: 
-  myInput:
-    description: 'Input to use'
-    default: 'world'
+  title-regex:
+    description: 'Regex to ensure PR title matches. Allows anything by default.'
+    required: true
+    default: '.*'
+  on-failed-regex-comment:
+    description: 'Comment for the bot to post on PRs that fail the regex. Use %regex% to reference regex.'
+    required: true
+    default: 'PR title failed to match %regex%.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
