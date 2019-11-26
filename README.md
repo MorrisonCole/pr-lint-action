@@ -1,3 +1,3 @@
 # Pull Request Linter
 
-This action checks PR title to ensure they match a given regex.
+A GitHub Action to ensure that your PR title matches a given regex.
