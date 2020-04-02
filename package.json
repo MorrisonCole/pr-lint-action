@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@types/jest": "24.9.1",
-    "@types/node": "12.0.4",
+    "@types/node": "12.12.34",
     "jest": "24.8.0",
     "jest-circus": "24.7.1",
     "prettier": "1.17.1",
