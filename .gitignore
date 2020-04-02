@@ -1,4 +1,5 @@
+# JetBrains
 .idea/
 
-package-lock.json
+# Packages
 node_modules
