@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/MorrisonCole/pr-lint-action#readme",
   "dependencies": {
-    "@actions/core": "1.0.0",
+    "@actions/core": "1.2.3",
     "@actions/io": "1.0.0",
     "@actions/exec": "1.0.0",
     "@actions/github": "1.0.0",
