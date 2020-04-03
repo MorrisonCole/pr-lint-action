@@ -7,6 +7,8 @@ async function run(): Promise<void> {
   const githubToken = core.getInput('repo-token');
   const githubClient = new GitHub(githubToken);
 
+  const pr = githubContext.issue;
+
   const titleRegex: RegExp = new RegExp(core.getInput('title-regex'));
   const title: string = githubContext.payload.pull_request?.title ?? '';
 
@@ -17,10 +19,10 @@ async function run(): Promise<void> {
   core.debug(`Title Regex: ${titleRegex}`);
   core.debug(`Title: ${title}`);
 
-  if (!titleRegex.test(title)) {
+  const titleMatchesRegex: boolean = titleRegex.test(title);
+  if (!titleMatchesRegex) {
     core.setFailed(onFailedRegexComment);
 
-    const pr = githubContext.issue;
     githubClient.pulls.createReview({
       owner: pr.owner,
       repo: pr.repo,
@@ -29,6 +31,14 @@ async function run(): Promise<void> {
       event: 'COMMENT'
     });
   }
+
+  await githubClient.repos.createStatus({
+    owner: pr.owner,
+    repo: pr.repo,
+    sha: process.env.GITHUB_SHA ?? "",
+    state: titleMatchesRegex ? 'success' : 'pending',
+    context: 'MorrisonCole/pr-lint-action',
+  });
 }
 
 run().catch(error => {
