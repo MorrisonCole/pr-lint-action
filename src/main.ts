@@ -34,7 +34,7 @@ async function run(): Promise<void> {
     owner: pr.owner,
     repo: pr.repo,
     sha: process.env.GITHUB_SHA ?? "",
-    state: titleMatchesRegex ? 'success' : 'pending',
+    state: titleMatchesRegex ? 'success' : 'failure',
     context: 'MorrisonCole/pr-lint-action',
   });
 }
