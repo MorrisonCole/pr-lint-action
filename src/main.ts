@@ -8,7 +8,7 @@ async function run() {
   const githubClient: GitHub = new GitHub(githubToken);
 
   const titleRegex: RegExp = new RegExp(core.getInput('title-regex'));
-  const title: string = githubContext.payload.pull_request?.title ?? "";
+  const title: string = githubContext.payload.pull_request?.title ?? '';
 
   const onFailedRegexComment = core
     .getInput('on-failed-regex-comment')
@@ -17,22 +17,20 @@ async function run() {
   core.debug(`Title Regex: ${titleRegex}`);
   core.debug(`Title: ${title}`);
 
-  try {
-    if (!titleRegex.test(title)) {
-      core.setFailed(onFailedRegexComment);
+  if (!titleRegex.test(title)) {
+    core.setFailed(onFailedRegexComment);
 
-      const pr = githubContext.issue;
-      githubClient.pulls.createReview({
-        owner: pr.owner,
-        repo: pr.repo,
-        pull_number: pr.number,
-        body: onFailedRegexComment,
-        event: 'COMMENT'
-      });
-    }
-  } catch (error) {
-    core.setFailed(error.message);
+    const pr = githubContext.issue;
+    githubClient.pulls.createReview({
+      owner: pr.owner,
+      repo: pr.repo,
+      pull_number: pr.number,
+      body: onFailedRegexComment,
+      event: 'COMMENT'
+    });
   }
 }
 
-run();
+run().catch(error => {
+  core.setFailed(error);
+});
