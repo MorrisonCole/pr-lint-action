@@ -1,7 +1,7 @@
 import {GitHub} from '@actions/github/lib/github';
 
-const core = require('@actions/core');
-const github = require('@actions/github');
+import core from '@actions/core';
+import github from '@actions/github';
 
 async function run() {
   const githubContext = github.context;
@@ -11,7 +11,8 @@ async function run() {
   const titleRegex = new RegExp(core.getInput('title-regex'));
   const title = githubContext.payload.pull_request.title;
 
-  const onFailedRegexComment = core.getInput('on-failed-regex-comment')
+  const onFailedRegexComment = core
+    .getInput('on-failed-regex-comment')
     .replace('%regex%', titleRegex.source);
 
   core.debug(`Title Regex: ${titleRegex}`);
