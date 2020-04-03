@@ -20,25 +20,15 @@ async function run(): Promise<void> {
   core.debug(`Title: ${title}`);
 
   const titleMatchesRegex: boolean = titleRegex.test(title);
-  if (!titleMatchesRegex) {
-    core.setFailed(onFailedRegexComment);
-
+  if (!titleMatchesRegex) {    
     githubClient.pulls.createReview({
       owner: pr.owner,
       repo: pr.repo,
       pull_number: pr.number,
       body: onFailedRegexComment,
-      event: 'COMMENT'
+      event: 'REQUEST_CHANGES'
     });
   }
-
-  await githubClient.repos.createStatus({
-    owner: pr.owner,
-    repo: pr.repo,
-    sha: process.env.GITHUB_SHA ?? "",
-    state: titleMatchesRegex ? 'success' : 'pending',
-    context: 'MorrisonCole/pr-lint-action',
-  });
 }
 
 run().catch(error => {
