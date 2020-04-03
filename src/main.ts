@@ -7,8 +7,8 @@ async function run() {
   const githubToken = core.getInput('repo-token');
   const githubClient: GitHub = new GitHub(githubToken);
 
-  const titleRegex = new RegExp(core.getInput('title-regex'));
-  const title = githubContext.payload.pull_request.title;
+  const titleRegex: RegExp = new RegExp(core.getInput('title-regex'));
+  const title: string = githubContext.payload.pull_request?.title ?? "";
 
   const onFailedRegexComment = core
     .getInput('on-failed-regex-comment')

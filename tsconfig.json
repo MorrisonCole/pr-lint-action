@@ -4,7 +4,6 @@
     "esModuleInterop": true,
     "module": "commonjs",
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
