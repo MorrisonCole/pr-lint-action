@@ -1,5 +1,4 @@
 import {GitHub} from '@actions/github/lib/github';
-
 import core from '@actions/core';
 import github from '@actions/github';
 
@@ -36,5 +35,4 @@ async function run() {
   }
 }
 
-// noinspection JSIgnoredPromiseFromCall
 run();
