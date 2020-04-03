@@ -20,13 +20,31 @@ async function run(): Promise<void> {
   core.debug(`Title: ${title}`);
 
   const titleMatchesRegex: boolean = titleRegex.test(title);
-  if (!titleMatchesRegex) {    
+  if (!titleMatchesRegex) {
     githubClient.pulls.createReview({
       owner: pr.owner,
       repo: pr.repo,
       pull_number: pr.number,
       body: onFailedRegexComment,
       event: 'REQUEST_CHANGES'
+    });
+  } else {
+    const reviews = await githubClient.pulls.listReviews({
+      owner: pr.owner,
+      repo: pr.repo,
+      pull_number: pr.number
+    });
+
+    reviews.data.forEach(review => {
+      if (review.user.login == 'github-actions[bot]') {
+        githubClient.pulls.dismissReview({
+          owner: pr.owner,
+          repo: pr.repo,
+          pull_number: pr.number,
+          review_id: review.id,
+          message: 'All good!'
+        });
+      }
     });
   }
 }
