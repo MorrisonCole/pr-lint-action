@@ -15,4 +15,5 @@ jobs:
     - uses: morrisoncole/pr-lint-action@master
       with:
         title-regex: "#[eE][xX]-[0-9]+"
+        on-failed-regex-comment: "This is just an example. Failed regex: %regex%!"
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
