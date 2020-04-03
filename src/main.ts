@@ -2,10 +2,10 @@ import {GitHub} from '@actions/github/lib/github';
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 
-async function run() {
+async function run(): Promise<void> {
   const githubContext = github.context;
   const githubToken = core.getInput('repo-token');
-  const githubClient: GitHub = new GitHub(githubToken);
+  const githubClient = new GitHub(githubToken);
 
   const titleRegex: RegExp = new RegExp(core.getInput('title-regex'));
   const title: string = githubContext.payload.pull_request?.title ?? '';

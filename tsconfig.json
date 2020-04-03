@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "module": "commonjs",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -11,7 +11,7 @@
     "removeComments": true,
     "rootDir": "./src",
     "strict": true,
-    "target": "es6"
+    "target": "ESNext"
   },
   "exclude": ["node_modules", "**/*.test.ts"]
 }
