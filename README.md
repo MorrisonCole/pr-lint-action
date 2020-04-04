@@ -39,7 +39,13 @@ title is edited to match it, the bot will dismiss its review.
 
 ### v1.0.0
 
-* Initial release. This version uses action status checks but suffers from https://github.com/MorrisonCole/pr-lint-action/issues/5 since the GitHub actions API treats different hook types as separate checks by default.
+* Initial release. This version uses action status checks but suffers from [#5](https://github.com/MorrisonCole/pr-lint-action/issues/5) since the GitHub actions API treats different hook types as separate checks by default.
+
+## FAQ
+
+### Why doesn't this Action use status checks any more?
+
+Since actions [are currently not grouped together](https://github.community/t5/GitHub-Actions/duplicate-checks-on-pull-request-event/m-p/33157), previously failed status checks were persisted despite newer runs succeeding (reported in [#5](https://github.com/MorrisonCole/pr-lint-action/issues/5)). We made the decision to use a bot-based 'request changes' workflow for the time being.
 
 ## Related Reading
 
