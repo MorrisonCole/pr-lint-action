@@ -1,18 +1,20 @@
-name: 'Pull Request Linter'
-description: 'Ensures your PR title matches a given regex'
-author: 'MorrisonCole'
+name: "Pull Request Linter"
+description: "Ensures your PR title matches a given regex"
+author: "MorrisonCole"
 branding:
-  icon: 'check'
-  color: 'green'
-inputs: 
+  icon: "check"
+  color: "green"
+inputs:
   title-regex:
-    description: 'Regex to ensure PR title matches. Allows anything by default.'
+    description: "Regex to ensure PR title matches. Allows anything by default."
     required: true
-    default: '.*'
+    default: ".*"
   on-failed-regex-comment:
-    description: 'Comment for the bot to post on PRs that fail the regex. Use %regex% to reference regex.'
+    description:
+      "Comment for the bot to post on PRs that fail the regex. Use %regex% to
+      reference regex."
     required: true
-    default: 'PR title failed to match %regex%.'
+    default: "PR title failed to match %regex%."
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"

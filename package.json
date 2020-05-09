@@ -5,7 +5,7 @@
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write **/*.ts"
+    "format": "prettier --write \"**/*.{ts,md,json,yml}\""
   },
   "repository": {
     "type": "git",

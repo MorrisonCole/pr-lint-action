@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "commitMessageSuffix": "#EX-123",
   "prConcurrentLimit": 1,
   "prHourlyLimit": 0

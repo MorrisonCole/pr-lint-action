@@ -1,10 +1,11 @@
-# Pull Request Linter
+# Pull Request Linter [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 A GitHub Action to ensure that your PR title matches a given regex.
 
 ## Usage
 
-Create a workflow definition at `.github/workflows/<my-workflow>.yml` with something like the following contents:
+Create a workflow definition at `.github/workflows/<my-workflow>.yml` with
+something like the following contents:
 
 ```yaml
 name: PR Lint
@@ -21,31 +22,39 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: morrisoncole/pr-lint-action@v1.1.0
-      with:
-        title-regex: "#EX-[0-9]+"
-        on-failed-regex-comment: "This is just an example. Failed regex: `%regex%`!"
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-
+      - uses: morrisoncole/pr-lint-action@v1.1.0
+        with:
+          title-regex: "#EX-[0-9]+"
+          on-failed-regex-comment:
+            "This is just an example. Failed regex: `%regex%`!"
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
 ## Changelog
 
 ### v1.1.0
 
-* Replaced status checks with an automatic bot review. If the PR title fails to match the regex, the bot will request changes. Once the
-title is edited to match it, the bot will dismiss its review.
-* Updated all dependencies.
+- Replaced status checks with an automatic bot review. If the PR title fails to
+  match the regex, the bot will request changes. Once the title is edited to
+  match it, the bot will dismiss its review.
+- Updated all dependencies.
 
 ### v1.0.0
 
-* Initial release. This version uses action status checks but suffers from [#5](https://github.com/MorrisonCole/pr-lint-action/issues/5) since the GitHub actions API treats different hook types as separate checks by default.
+- Initial release. This version uses action status checks but suffers from
+  [#5](https://github.com/MorrisonCole/pr-lint-action/issues/5) since the GitHub
+  actions API treats different hook types as separate checks by default.
 
 ## FAQ
 
 ### Why doesn't this Action use status checks any more?
 
-Since actions [are currently not grouped together](https://github.community/t5/GitHub-Actions/duplicate-checks-on-pull-request-event/m-p/33157), previously failed status checks were persisted despite newer runs succeeding (reported in [#5](https://github.com/MorrisonCole/pr-lint-action/issues/5)). We made the decision to use a bot-based 'request changes' workflow for the time being.
+Since actions
+[are currently not grouped together](https://github.community/t5/GitHub-Actions/duplicate-checks-on-pull-request-event/m-p/33157),
+previously failed status checks were persisted despite newer runs succeeding
+(reported in [#5](https://github.com/MorrisonCole/pr-lint-action/issues/5)). We
+made the decision to use a bot-based 'request changes' workflow for the time
+being.
 
 ## Developing
 
@@ -59,4 +68,4 @@ Building outputs to `lib/main.js`.
 
 ## Related Reading
 
-* [GitHub Action Metadata Syntax](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/metadata-syntax-for-github-actions)
+- [GitHub Action Metadata Syntax](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/metadata-syntax-for-github-actions)
