@@ -47,6 +47,12 @@ title is edited to match it, the bot will dismiss its review.
 
 Since actions [are currently not grouped together](https://github.community/t5/GitHub-Actions/duplicate-checks-on-pull-request-event/m-p/33157), previously failed status checks were persisted despite newer runs succeeding (reported in [#5](https://github.com/MorrisonCole/pr-lint-action/issues/5)). We made the decision to use a bot-based 'request changes' workflow for the time being.
 
+## Developing
+
+### Build
+`yarn install`
+`yarn build`
+
 ## Related Reading
 
 * [GitHub Action Metadata Syntax](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/metadata-syntax-for-github-actions)

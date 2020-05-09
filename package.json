@@ -15,7 +15,6 @@
     "actions",
     "container",
     "toolkit",
-    "setup",
     "lint"
   ],
   "author": "Morrison Cole <admin@morrisoncole.co.uk>",
