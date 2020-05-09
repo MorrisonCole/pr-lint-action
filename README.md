@@ -52,6 +52,7 @@ Since actions [are currently not grouped together](https://github.community/t5/G
 ### Build
 
 `yarn install`
+
 `yarn build`
 
 Building outputs to `lib/main.js`.
