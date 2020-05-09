@@ -22,7 +22,7 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.1.0
+      - uses: morrisoncole/pr-lint-action@v1.1.1
         with:
           title-regex: "#EX-[0-9]+"
           on-failed-regex-comment:
@@ -31,6 +31,13 @@ jobs:
 ```
 
 ## Changelog
+
+### v1.1.1
+
+Internal refactoring only:
+
+- Update dependencies
+- Configure ESLint & Prettier
 
 ### v1.1.0
 
