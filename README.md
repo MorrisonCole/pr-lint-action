@@ -50,8 +50,11 @@ Since actions [are currently not grouped together](https://github.community/t5/G
 ## Developing
 
 ### Build
+
 `yarn install`
 `yarn build`
+
+Building outputs to `lib/main.js`.
 
 ## Related Reading
 
