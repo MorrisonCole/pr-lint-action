@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": false,
     "esModuleInterop": true,
     "lib": ["ES2019"],
     "module": "CommonJS",

@@ -5,7 +5,8 @@
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write \"**/*.{ts,md,json,yml}\""
+    "lint:eslint": "eslint . --ext .ts",
+    "lint:prettier": "prettier \"**/*.{ts,md,json,yml}\" --write"
   },
   "repository": {
     "type": "git",
@@ -25,13 +26,17 @@
   "homepage": "https://github.com/MorrisonCole/pr-lint-action#readme",
   "dependencies": {
     "@actions/core": "1.2.4",
-    "@actions/io": "1.0.2",
     "@actions/exec": "1.0.4",
     "@actions/github": "2.2.0",
+    "@actions/io": "1.0.2",
     "@actions/tool-cache": "1.3.4"
   },
   "devDependencies": {
     "@types/node": "12.12.38",
+    "@typescript-eslint/eslint-plugin": "2.31.0",
+    "@typescript-eslint/parser": "2.31.0",
+    "eslint": "7.0.0",
+    "eslint-config-prettier": "6.11.0",
     "prettier": "2.0.5",
     "typescript": "3.8.3"
   }
