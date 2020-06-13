@@ -2,5 +2,11 @@
   "extends": ["config:base"],
   "commitMessageSuffix": "#EX-123",
   "prConcurrentLimit": 1,
-  "prHourlyLimit": 0
+  "prHourlyLimit": 0,
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
 }
