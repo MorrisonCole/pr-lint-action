@@ -15,6 +15,10 @@ inputs:
       reference regex."
     required: true
     default: "PR title failed to match %regex%."
+  repo-token:
+    description:
+      "Github token with access to the repository (secrets.GITHUB_TOKEN)."
+    required: true
 runs:
   using: "docker"
   image: "Dockerfile"
