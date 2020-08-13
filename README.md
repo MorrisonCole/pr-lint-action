@@ -22,7 +22,7 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.1.1
+      - uses: morrisoncole/pr-lint-action@v1.2.2
         with:
           title-regex: "#EX-[0-9]+"
           on-failed-regex-comment:
