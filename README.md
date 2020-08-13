@@ -32,6 +32,14 @@ jobs:
 
 ## Changelog
 
+### v1.2.2
+
+- Fixes [#92](https://github.com/MorrisonCole/pr-lint-action/issues/92)
+
+### v1.2.1
+
+- Fixes [#90](https://github.com/MorrisonCole/pr-lint-action/issues/90)
+
 ### v1.1.1
 
 Internal refactoring only:

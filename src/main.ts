@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { GitHub } from "@actions/github/lib/github";
+import { getOctokit } from "@actions/github/lib/github";
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 
 async function run(): Promise<void> {
   const githubContext = github.context;
   const githubToken = core.getInput("repo-token");
-  const githubClient = new GitHub(githubToken);
+  const githubClient = getOctokit(githubToken);
 
   const pr = githubContext.issue;
 
