@@ -2,22 +2,18 @@
   "compilerOptions": {
     "allowJs": false,
     "esModuleInterop": true,
-    "lib": [
-      "ES2020"
-    ],
+    "lib": ["ES2020"],
     "module": "CommonJS",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "./lib",
+    "outDir": "dist",
     "removeComments": true,
     "rootDir": "./src",
     "strict": true,
     "target": "ES2020"
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

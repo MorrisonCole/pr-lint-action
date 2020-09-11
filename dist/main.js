@@ -32,11 +32,11 @@ async function run() {
     const onFailedRegexComment = core
         .getInput("on-failed-regex-comment")
         .replace("%regex%", titleRegex.source);
-    core.debug(`Title Regex: ${titleRegex}`);
+    core.debug(`Title Regex: ${titleRegex.source}`);
     core.debug(`Title: ${title}`);
     const titleMatchesRegex = titleRegex.test(title);
     if (!titleMatchesRegex) {
-        githubClient.pulls.createReview({
+        void githubClient.pulls.createReview({
             owner: pr.owner,
             repo: pr.repo,
             pull_number: pr.number,
@@ -52,7 +52,7 @@ async function run() {
         });
         reviews.data.forEach((review) => {
             if (review.user.login == "github-actions[bot]") {
-                githubClient.pulls.dismissReview({
+                void githubClient.pulls.dismissReview({
                     owner: pr.owner,
                     repo: pr.repo,
                     pull_number: pr.number,

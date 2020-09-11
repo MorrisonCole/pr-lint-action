@@ -22,7 +22,7 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.2.2
+      - uses: morrisoncole/pr-lint-action@v1.2.3
         with:
           title-regex: "#EX-[0-9]+"
           on-failed-regex-comment:
@@ -31,6 +31,14 @@ jobs:
 ```
 
 ## Changelog
+
+### v1.2.3
+
+Internal refactoring only:
+
+- Upgrade dependencies
+- Move from `lib` to `dist`
+- Address ESLint warnings
 
 ### v1.2.2
 
@@ -44,21 +52,21 @@ jobs:
 
 Internal refactoring only:
 
-- Update dependencies
+- Upgrade dependencies
 - Configure ESLint & Prettier
 
 ### v1.1.0
 
 - Replaced status checks with an automatic bot review. If the PR title fails to
   match the regex, the bot will request changes. Once the title is edited to
-  match it, the bot will dismiss its review.
-- Updated all dependencies.
+  match it, the bot will dismiss its review
+- Upgrade dependencies
 
 ### v1.0.0
 
 - Initial release. This version uses action status checks but suffers from
   [#5](https://github.com/MorrisonCole/pr-lint-action/issues/5) since the GitHub
-  actions API treats different hook types as separate checks by default.
+  actions API treats different hook types as separate checks by default
 
 ## FAQ
 
@@ -79,7 +87,7 @@ being.
 
 `yarn build`
 
-Building outputs to `lib/main.js`.
+Building outputs to `dist/main.js`.
 
 ## Related Reading
 
