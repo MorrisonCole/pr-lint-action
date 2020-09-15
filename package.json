@@ -29,7 +29,7 @@
     "@actions/github": "4.0.0"
   },
   "devDependencies": {
-    "@types/node": "12.12.58",
+    "@types/node": "12.12.59",
     "@typescript-eslint/eslint-plugin": "4.1.1",
     "@typescript-eslint/parser": "4.1.1",
     "eslint": "7.9.0",
