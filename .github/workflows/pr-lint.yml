@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: morrisoncole/pr-lint-action@main
         with:
-          title-regex: "#EX-[0-9]+"
+          title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
           on-failed-regex-create-review: true
           on-failed-regex-comment:
