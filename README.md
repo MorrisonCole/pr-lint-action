@@ -25,12 +25,20 @@ jobs:
       - uses: morrisoncole/pr-lint-action@v1.2.3
         with:
           title-regex: "#EX-[0-9]+"
+          on-failed-regex-create-review: true
           on-failed-regex-comment:
             "This is just an example. Failed regex: `%regex%`!"
+          on-failed-regex-fail-action: false
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
 ## Changelog
+
+### v1.3.0
+
+- Adds [#111](https://github.com/MorrisonCole/pr-lint-action/issues/111),
+  ability to specify whether to create a review and whether to fail the action
+  on a regex mismatch independently.
 
 ### v1.2.3
 
