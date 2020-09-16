@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: morrisoncole/pr-lint-action@v1.3.0
         with:
-          title-regex: "#EX-[0-9]+"
+          title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
           on-failed-regex-create-review: true
           on-failed-regex-comment:
@@ -36,9 +36,10 @@ jobs:
 
 ### v1.3.0
 
-- Adds [#111](https://github.com/MorrisonCole/pr-lint-action/issues/111),
+- Adds [#111](https://github.com/MorrisonCole/pr-lint-action/issues/111), the
   ability to specify whether to create a review and whether to fail the action
-  on a regex mismatch independently.
+  on a regex mismatch independently with `on-failed-regex-fail-action` &
+  `on-failed-regex-create-review`.
 
 ### v1.2.3
 
