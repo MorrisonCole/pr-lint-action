@@ -22,13 +22,13 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.2.3
+      - uses: morrisoncole/pr-lint-action@v1.3.0
         with:
           title-regex: "#EX-[0-9]+"
+          on-failed-regex-fail-action: false
           on-failed-regex-create-review: true
           on-failed-regex-comment:
             "This is just an example. Failed regex: `%regex%`!"
-          on-failed-regex-fail-action: false
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
