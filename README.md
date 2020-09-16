@@ -22,15 +22,28 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.2.3
+      - uses: morrisoncole/pr-lint-action@v1.3.0
         with:
-          title-regex: "#EX-[0-9]+"
+          title-regex: "#[eE][xX]-[0-9]+"
+          on-failed-regex-fail-action: false
+          on-failed-regex-create-review: true
           on-failed-regex-comment:
             "This is just an example. Failed regex: `%regex%`!"
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
 ## Changelog
+
+### v1.3.0
+
+- Adds [#111](https://github.com/MorrisonCole/pr-lint-action/issues/111), the
+  ability to specify whether to create a review and whether to fail the action
+  on a regex mismatch independently with `on-failed-regex-fail-action` &
+  `on-failed-regex-create-review`.
+- `on-failed-regex-comment` is no longer a required input.
+
+_Note:_ existing behaviour from previous releases is preserved without
+additional configuration 🙏.
 
 ### v1.2.3
 
