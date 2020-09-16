@@ -16,6 +16,6 @@ jobs:
         with:
           title-regex: "#EX-[0-9]+"
           on-failed-regex-fail-action: true
-          on-failed-regex-create-review: true
+          on-failed-regex-create-review: false
           on-failed-regex-comment: "Test. Failed regex: `%regex%`!"
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
