@@ -40,6 +40,10 @@ jobs:
   ability to specify whether to create a review and whether to fail the action
   on a regex mismatch independently with `on-failed-regex-fail-action` &
   `on-failed-regex-create-review`.
+- `on-failed-regex-comment` is no longer a required input.
+
+_Note:_ existing behaviour from previous releases is preserved without
+additional configuration 🙏.
 
 ### v1.2.3
 
