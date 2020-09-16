@@ -15,7 +15,7 @@ jobs:
       - uses: morrisoncole/pr-lint-action@feature/configure-failure-modes-GH-111
         with:
           title-regex: "#EX-[0-9]+"
-          on-failed-regex-fail-action: false
+          on-failed-regex-fail-action: true
           on-failed-regex-create-review: true
           on-failed-regex-comment: "Test. Failed regex: `%regex%`!"
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
