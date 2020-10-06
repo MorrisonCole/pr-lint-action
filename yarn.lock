@@ -195,10 +195,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.4.tgz#38fd73ddfd9b55abb1e1b2ed578cb55bd7b7d339"
   integrity sha512-8+KAKzEvSUdeo+kmqnKrqgeE+LcA0tjYWFY7RPProVYwnqDjukzO+3b6dLD56rYX5TdWejnEOLJYOIeh4CXKuA==
 
-"@types/node@12.12.63":
-  version "12.12.63"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.63.tgz#88220b261bc95afa17d25be5daf268214c19c780"
-  integrity sha512-jRP6uNtUKAFz3Cl7zwCKW9hoRSNzuNSsQ3sLGSv5Uf+yWQvx226DF9a0Moa3HADkIp7ae/FhLwlqQzrgfg9hFg==
+"@types/node@12.12.64":
+  version "12.12.64"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.64.tgz#e3b336dc4c6ba52c6b59e3bd69a100347c20b1c0"
+  integrity sha512-UV1/ZJMC+HcP902wWdpC43cAcGu0IQk/I5bXjP2aSuCjsk3cE74mDvFrLKga7oDC170ugOAYBwfT4DSQW3akDA==
 
 "@types/node@>= 8":
   version "13.13.5"
