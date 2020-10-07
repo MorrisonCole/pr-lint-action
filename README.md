@@ -37,18 +37,18 @@ jobs:
 
 ### v1.4.0
 
-- Adds [#119](https://github.com/MorrisonCole/pr-lint-action/issues/119), the
-  ability to configure whether changes are requested or not with
-  `on-failed-regex-request-changes`. Existing behaviour is preserved
-- Upgrades all dependencies
+- Adds [#119](https://github.com/MorrisonCole/pr-lint-action/issues/119) (thanks
+  @bryantbiggs! 🙏) the ability to configure whether changes are requested or
+  not with `on-failed-regex-request-changes`. Existing behaviour is preserved.
+- Upgrades all dependencies.
 
 ### v1.3.0
 
 - Adds [#111](https://github.com/MorrisonCole/pr-lint-action/issues/111), the
   ability to specify whether to create a review and whether to fail the action
   on a regex mismatch independently with `on-failed-regex-fail-action` &
-  `on-failed-regex-create-review`
-- `on-failed-regex-comment` is no longer a required input
+  `on-failed-regex-create-review`.
+- `on-failed-regex-comment` is no longer a required input.
 
 _Note:_ existing behaviour from previous releases is preserved without
 additional configuration 🙏.
@@ -57,37 +57,37 @@ additional configuration 🙏.
 
 Internal refactoring only:
 
-- Upgrade dependencies
-- Move from `lib` to `dist`
-- Address ESLint warnings
+- Upgrade dependencies.
+- Move from `lib` to `dist`.
+- Address ESLint warnings.
 
 ### v1.2.2
 
-- Fixes [#92](https://github.com/MorrisonCole/pr-lint-action/issues/92)
+- Fixes [#92](https://github.com/MorrisonCole/pr-lint-action/issues/92).
 
 ### v1.2.1
 
-- Fixes [#90](https://github.com/MorrisonCole/pr-lint-action/issues/90)
+- Fixes [#90](https://github.com/MorrisonCole/pr-lint-action/issues/90).
 
 ### v1.1.1
 
 Internal refactoring only:
 
-- Upgrade dependencies
-- Configure ESLint & Prettier
+- Upgrade dependencies.
+- Configure ESLint & Prettier.
 
 ### v1.1.0
 
 - Replaced status checks with an automatic bot review. If the PR title fails to
   match the regex, the bot will request changes. Once the title is edited to
-  match it, the bot will dismiss its review
-- Upgrade dependencies
+  match it, the bot will dismiss its review.
+- Upgrade dependencies.
 
 ### v1.0.0
 
 - Initial release. This version uses action status checks but suffers from
   [#5](https://github.com/MorrisonCole/pr-lint-action/issues/5) since the GitHub
-  actions API treats different hook types as separate checks by default
+  actions API treats different hook types as separate checks by default.
 
 ## FAQ
 
