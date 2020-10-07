@@ -22,15 +22,36 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.1.1
+      - uses: morrisoncole/pr-lint-action@v1.3.0
         with:
-          title-regex: "#EX-[0-9]+"
+          title-regex: "#[eE][xX]-[0-9]+"
+          on-failed-regex-fail-action: false
+          on-failed-regex-create-review: true
           on-failed-regex-comment:
             "This is just an example. Failed regex: `%regex%`!"
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
 ## Changelog
+
+### v1.3.0
+
+- Adds [#111](https://github.com/MorrisonCole/pr-lint-action/issues/111), the
+  ability to specify whether to create a review and whether to fail the action
+  on a regex mismatch independently with `on-failed-regex-fail-action` &
+  `on-failed-regex-create-review`.
+- `on-failed-regex-comment` is no longer a required input.
+
+_Note:_ existing behaviour from previous releases is preserved without
+additional configuration 🙏.
+
+### v1.2.3
+
+Internal refactoring only:
+
+- Upgrade dependencies
+- Move from `lib` to `dist`
+- Address ESLint warnings
 
 ### v1.2.2
 
@@ -44,21 +65,21 @@ jobs:
 
 Internal refactoring only:
 
-- Update dependencies
+- Upgrade dependencies
 - Configure ESLint & Prettier
 
 ### v1.1.0
 
 - Replaced status checks with an automatic bot review. If the PR title fails to
   match the regex, the bot will request changes. Once the title is edited to
-  match it, the bot will dismiss its review.
-- Updated all dependencies.
+  match it, the bot will dismiss its review
+- Upgrade dependencies
 
 ### v1.0.0
 
 - Initial release. This version uses action status checks but suffers from
   [#5](https://github.com/MorrisonCole/pr-lint-action/issues/5) since the GitHub
-  actions API treats different hook types as separate checks by default.
+  actions API treats different hook types as separate checks by default
 
 ## FAQ
 
@@ -79,7 +100,7 @@ being.
 
 `yarn build`
 
-Building outputs to `lib/main.js`.
+Building outputs to `dist/main.js`.
 
 ## Related Reading
 
