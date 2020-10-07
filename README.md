@@ -26,6 +26,7 @@ jobs:
         with:
           title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
+          on-failed-regex-request-changes: false
           on-failed-regex-create-review: true
           on-failed-regex-comment:
             "This is just an example. Failed regex: `%regex%`!"
@@ -34,13 +35,20 @@ jobs:
 
 ## Changelog
 
+### v1.4.0
+
+- Adds [#119](https://github.com/MorrisonCole/pr-lint-action/issues/119), the
+  ability to configure whether changes are requested or not with
+  `on-failed-regex-request-changes`. Existing behaviour is preserved
+- Upgrades all dependencies
+
 ### v1.3.0
 
 - Adds [#111](https://github.com/MorrisonCole/pr-lint-action/issues/111), the
   ability to specify whether to create a review and whether to fail the action
   on a regex mismatch independently with `on-failed-regex-fail-action` &
-  `on-failed-regex-create-review`.
-- `on-failed-regex-comment` is no longer a required input.
+  `on-failed-regex-create-review`
+- `on-failed-regex-comment` is no longer a required input
 
 _Note:_ existing behaviour from previous releases is preserved without
 additional configuration 🙏.

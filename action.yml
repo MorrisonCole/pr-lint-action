@@ -25,10 +25,11 @@ inputs:
     description: "Whether the action should fail when the regex doesn't match."
     required: false
     default: false
-  on-failed-regex-comment-only:
-    description: "Whether the action should request changes or just provide a comment"
+  on-failed-regex-request-changes:
+    description:
+      "Whether the action should request changes or just provide a comment."
     required: false
-    default: false
+    default: true
   repo-token:
     description:
       "Github token with access to the repository (secrets.GITHUB_TOKEN)."

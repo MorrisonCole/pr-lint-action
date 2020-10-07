@@ -30,7 +30,7 @@ const titleRegexInput = core.getInput("title-regex", {
 const onFailedRegexCreateReviewInput = core.getInput("on-failed-regex-create-review") == "true";
 const onFailedRegexCommentInput = core.getInput("on-failed-regex-comment");
 const onFailedRegexFailActionInput = core.getInput("on-failed-regex-fail-action") == "true";
-const onFailedRegexCommentOnly = core.getInput("on-failed-regex-comment-only") == "true";
+const onFailedRegexRequestChanges = core.getInput("on-failed-regex-request-changes") == "true";
 async function run() {
     const githubContext = github.context;
     const pullRequest = githubContext.issue;
@@ -60,7 +60,7 @@ function createReview(comment, pullRequest) {
         repo: pullRequest.repo,
         pull_number: pullRequest.number,
         body: comment,
-        event: onFailedRegexCommentOnly ? "COMMENT" : "REQUEST_CHANGES",
+        event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
     });
 }
 async function dismissReview(pullRequest) {
