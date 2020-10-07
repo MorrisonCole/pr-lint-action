@@ -15,6 +15,8 @@ const onFailedRegexCommentInput: string = core.getInput(
 );
 const onFailedRegexFailActionInput: boolean =
   core.getInput("on-failed-regex-fail-action") == "true";
+const onFailedRegexCommentOnly: boolean =
+  core.getInput("on-failed-regex-comment-only") == "true";
 
 async function run(): Promise<void> {
   const githubContext = github.context;
@@ -55,7 +57,7 @@ function createReview(
     repo: pullRequest.repo,
     pull_number: pullRequest.number,
     body: comment,
-    event: "REQUEST_CHANGES",
+    event: onFailedRegexCommentOnly ? "COMMENT" : "REQUEST_CHANGES",
   });
 }
 
