@@ -19,5 +19,5 @@ jobs:
           on-failed-regex-create-review: true
           on-failed-regex-request-changes: false
           on-failed-regex-comment:
-            "This is just an example. Failed regex: `%regex%`!"
+            "This is just an example PR. Failed regex: `%regex%`!"
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
