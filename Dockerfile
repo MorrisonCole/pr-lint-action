@@ -2,6 +2,6 @@ FROM node:slim
 
 COPY . .
 
-RUN npm install --production
+RUN yarn install --production
 
 ENTRYPOINT ["node", "/dist/main.js"]
