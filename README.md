@@ -22,7 +22,7 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.3.0
+      - uses: morrisoncole/pr-lint-action@v1.4.1
         with:
           title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
@@ -34,6 +34,11 @@ jobs:
 ```
 
 ## Changelog
+
+### v1.4.1
+
+- Fixes [#145](https://github.com/MorrisonCole/pr-lint-action/issues/145)
+  (thanks @jnewland! 🤩).
 
 ### v1.4.0
 
