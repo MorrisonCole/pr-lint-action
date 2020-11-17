@@ -69,13 +69,14 @@ async function dismissReview(pullRequest) {
         repo: pullRequest.repo,
         pull_number: pullRequest.number,
     });
-    reviews.data.forEach(({ id, user: { login }, state, }) => {
-        if (isGitHubActionUser(login) && alreadyRequiredChanges(state)) {
+    reviews.data.forEach((review) => {
+        if (isGitHubActionUser(review.user.login) &&
+            alreadyRequiredChanges(review.state)) {
             void githubClient.pulls.dismissReview({
                 owner: pullRequest.owner,
                 repo: pullRequest.repo,
                 pull_number: pullRequest.number,
-                review_id: id,
+                review_id: review.id,
                 message: "All good!",
             });
         }
