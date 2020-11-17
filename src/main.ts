@@ -1,4 +1,5 @@
 import { getOctokit } from "@actions/github/lib/github";
+import { OctokitResponse, PullsListReviewsResponseData } from "@octokit/types";
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 
@@ -61,36 +62,48 @@ function createReview(
   });
 }
 
-function isGitHubActionUser(review: any) {
-  return review.user.login == "github-actions[bot]"
-}
-
-function isRequireChanges(review: any) {
-  return review.state == "CHANGES_REQUESTED"
-}
-
 async function dismissReview(pullRequest: {
   owner: string;
   repo: string;
   number: number;
 }) {
-  const reviews = await githubClient.pulls.listReviews({
-    owner: pullRequest.owner,
-    repo: pullRequest.repo,
-    pull_number: pullRequest.number,
-  });
-
-  reviews.data.forEach((review) => {
-    if (isGitHubActionUser(review) && isRequireChanges(review)) {
-      void githubClient.pulls.dismissReview({
-        owner: pullRequest.owner,
-        repo: pullRequest.repo,
-        pull_number: pullRequest.number,
-        review_id: review.id,
-        message: "All good!",
-      });
+  const reviews: OctokitResponse<PullsListReviewsResponseData> = await githubClient.pulls.listReviews(
+    {
+      owner: pullRequest.owner,
+      repo: pullRequest.repo,
+      pull_number: pullRequest.number,
     }
-  });
+  );
+
+  reviews.data.forEach(
+    ({
+      id,
+      user: { login },
+      state,
+    }: {
+      id: number;
+      user: { login: string };
+      state: string;
+    }) => {
+      if (isGitHubActionUser(login) && alreadyRequiredChanges(state)) {
+        void githubClient.pulls.dismissReview({
+          owner: pullRequest.owner,
+          repo: pullRequest.repo,
+          pull_number: pullRequest.number,
+          review_id: id,
+          message: "All good!",
+        });
+      }
+    }
+  );
+}
+
+function isGitHubActionUser(login: string) {
+  return login == "github-actions[bot]";
+}
+
+function alreadyRequiredChanges(state: string) {
+  return state == "CHANGES_REQUESTED";
 }
 
 run().catch((error) => {

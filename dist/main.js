@@ -63,29 +63,29 @@ function createReview(comment, pullRequest) {
         event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
     });
 }
-function isGitHubActionUser(review) {
-    return review.user.login == "github-actions[bot]";
-}
-function isRequireChanges(review) {
-    return review.state == "CHANGES_REQUESTED";
-}
 async function dismissReview(pullRequest) {
     const reviews = await githubClient.pulls.listReviews({
         owner: pullRequest.owner,
         repo: pullRequest.repo,
         pull_number: pullRequest.number,
     });
-    reviews.data.forEach((review) => {
-        if (isGitHubActionUser(review) && isRequireChanges(review)) {
+    reviews.data.forEach(({ id, user: { login }, state, }) => {
+        if (isGitHubActionUser(login) && alreadyRequiredChanges(state)) {
             void githubClient.pulls.dismissReview({
                 owner: pullRequest.owner,
                 repo: pullRequest.repo,
                 pull_number: pullRequest.number,
-                review_id: review.id,
+                review_id: id,
                 message: "All good!",
             });
         }
     });
+}
+function isGitHubActionUser(login) {
+    return login == "github-actions[bot]";
+}
+function alreadyRequiredChanges(state) {
+    return state == "CHANGES_REQUESTED";
 }
 run().catch((error) => {
     core.setFailed(error);
