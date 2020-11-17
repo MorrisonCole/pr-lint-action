@@ -63,6 +63,12 @@ function createReview(comment, pullRequest) {
         event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
     });
 }
+function isGitHubActionUser(review) {
+    return review.user.login == "github-actions[bot]";
+}
+function isRequireChanges(review) {
+    return review.state == "CHANGES_REQUESTED";
+}
 async function dismissReview(pullRequest) {
     const reviews = await githubClient.pulls.listReviews({
         owner: pullRequest.owner,
@@ -70,7 +76,7 @@ async function dismissReview(pullRequest) {
         pull_number: pullRequest.number,
     });
     reviews.data.forEach((review) => {
-        if (review.user.login == "github-actions[bot]") {
+        if (isGitHubActionUser(review) && isRequireChanges(review)) {
             void githubClient.pulls.dismissReview({
                 owner: pullRequest.owner,
                 repo: pullRequest.repo,
