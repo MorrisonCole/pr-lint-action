@@ -3,10 +3,11 @@
   "commitMessageSuffix": "#EX-123",
   "prConcurrentLimit": 1,
   "prHourlyLimit": 0,
+  "automerge": false,
   "packageRules": [
     {
-      "updateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "updateTypes": ["minor", "patch", "pin", "digest"]
     }
-  ]
+  ],
+  "labels": ["automerge", "dependencies"]
 }
