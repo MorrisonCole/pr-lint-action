@@ -22,7 +22,7 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.4.2
+      - uses: morrisoncole/pr-lint-action@v1.5.0
         with:
           title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
@@ -34,6 +34,12 @@ jobs:
 ```
 
 ## Changelog
+
+### v1.5.0
+
+- Reduces action run time from around 40 seconds to 1 second 🔥🚀. We now ship
+  the packaged source with Vercel's [ncc](https://github.com/vercel/ncc) and run
+  those directly rather than building on the fly with Docker.
 
 ### v1.4.2
 
@@ -118,7 +124,8 @@ being.
 
 `yarn build`
 
-Building outputs to `dist/index.js`.
+We package everything to a single file with Vercel's
+[ncc](https://github.com/vercel/ncc). Outputs to `dist/index.js`.
 
 ## Related Reading
 
