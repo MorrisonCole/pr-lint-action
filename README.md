@@ -118,7 +118,7 @@ being.
 
 `yarn build`
 
-Building outputs to `dist/main.js`.
+Building outputs to `dist/index.js`.
 
 ## Related Reading
 

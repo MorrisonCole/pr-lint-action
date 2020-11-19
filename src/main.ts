@@ -1,10 +1,9 @@
-import { getOctokit } from "@actions/github/lib/github";
 import { OctokitResponse, PullsListReviewsResponseData } from "@octokit/types";
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 
 const repoTokenInput = core.getInput("repo-token", { required: true });
-const githubClient = getOctokit(repoTokenInput);
+const githubClient = github.getOctokit(repoTokenInput);
 
 const titleRegexInput: string = core.getInput("title-regex", {
   required: true,
