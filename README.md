@@ -1,6 +1,6 @@
 # Pull Request Linter [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-A fast 🔥 GitHub Action to ensure that your PR title matches a given regex.
+:octocat: A fast 🔥 TypeScript GitHub Action to ensure that your PR title matches a given regex.
 
 Supports the following feedback mechanisms 🛠:
 * 🤖 Review, request/dismiss changes, and comment with bot
