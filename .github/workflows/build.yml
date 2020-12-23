@@ -13,5 +13,5 @@ jobs:
           yarn --frozen-lockfile
           yarn build
           git add dist/
-          git commit -m "ci: generate build"
+          git diff-index --quiet HEAD || git commit -m "ci: generate build"
           git push
