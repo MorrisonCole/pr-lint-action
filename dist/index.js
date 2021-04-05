@@ -5775,57 +5775,41 @@ function wrappy (fn, cb) {
 /***/ }),
 
 /***/ 399:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 "use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(186);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(438);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_1__);
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(186));
-const github = __importStar(__nccwpck_require__(438));
-const repoTokenInput = core.getInput("repo-token", { required: true });
-const githubClient = github.getOctokit(repoTokenInput);
-const titleRegexInput = core.getInput("title-regex", {
+
+const repoTokenInput = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("repo-token", { required: true });
+const githubClient = _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(repoTokenInput);
+const titleRegexInput = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("title-regex", {
     required: true,
 });
-const onFailedRegexCreateReviewInput = core.getInput("on-failed-regex-create-review") == "true";
-const onFailedRegexCommentInput = core.getInput("on-failed-regex-comment");
-const onFailedRegexFailActionInput = core.getInput("on-failed-regex-fail-action") == "true";
-const onFailedRegexRequestChanges = core.getInput("on-failed-regex-request-changes") == "true";
+const onFailedRegexCreateReviewInput = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("on-failed-regex-create-review") == "true";
+const onFailedRegexCommentInput = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("on-failed-regex-comment");
+const onFailedRegexFailActionInput = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("on-failed-regex-fail-action") == "true";
+const onFailedRegexRequestChanges = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("on-failed-regex-request-changes") == "true";
 async function run() {
     var _a, _b;
-    const githubContext = github.context;
+    const githubContext = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context;
     const pullRequest = githubContext.issue;
     const titleRegex = new RegExp(titleRegexInput);
     const title = (_b = (_a = githubContext.payload.pull_request) === null || _a === void 0 ? void 0 : _a.title) !== null && _b !== void 0 ? _b : "";
     const comment = onFailedRegexCommentInput.replace("%regex%", titleRegex.source);
-    core.debug(`Title Regex: ${titleRegex.source}`);
-    core.debug(`Title: ${title}`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.debug(`Title Regex: ${titleRegex.source}`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.debug(`Title: ${title}`);
     const titleMatchesRegex = titleRegex.test(title);
     if (!titleMatchesRegex) {
         if (onFailedRegexCreateReviewInput) {
             createReview(comment, pullRequest);
         }
         if (onFailedRegexFailActionInput) {
-            core.setFailed(comment);
+            _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(comment);
         }
     }
     else {
@@ -5869,7 +5853,7 @@ function alreadyRequiredChanges(state) {
     return state == "CHANGES_REQUESTED";
 }
 run().catch((error) => {
-    core.setFailed(error);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error);
 });
 
 
@@ -6019,6 +6003,46 @@ module.exports = require("zlib");;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__nccwpck_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => module['default'] :
+/******/ 				() => module;
+/******/ 			__nccwpck_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__nccwpck_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__nccwpck_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nccwpck_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	__nccwpck_require__.ab = __dirname + "/";/************************************************************************/
