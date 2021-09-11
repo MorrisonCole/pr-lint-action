@@ -26,7 +26,7 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.5.0
+      - uses: morrisoncole/pr-lint-action@v1.5.1
         with:
           title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
@@ -38,6 +38,13 @@ jobs:
 ```
 
 ## Changelog
+
+### v1.5.1
+
+Internal refactoring only:
+
+- Migrate to Yarn 2.
+- Upgrade dependencies.
 
 ### v1.5.0
 
