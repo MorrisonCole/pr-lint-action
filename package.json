@@ -2,9 +2,10 @@
   "name": "pr-lint-action",
   "version": "1.1.1",
   "description": "A GitHub Action to ensure that your PR title matches a given regex.",
-  "main": "dist/index.js",
+  "main": "lib/main.js",
   "scripts": {
-    "build": "ncc build src/main.ts --source-map --license licenses.txt --out dist",
+    "build": "tsc",
+    "package": "ncc build --source-map --license licenses.txt",
     "lint:eslint": "eslint . --ext .ts",
     "lint:prettier": "prettier \"**/*.{ts,md,json,yml}\" --write"
   },

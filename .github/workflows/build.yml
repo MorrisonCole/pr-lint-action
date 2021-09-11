@@ -12,6 +12,7 @@ jobs:
           git config user.email github-actions@github.com
           yarn --immutable
           yarn build
-          git add dist/
+          yarn package
+          git add lib/ dist/
           git diff-index --quiet HEAD || git commit -m "ci: generate build"
           git push
