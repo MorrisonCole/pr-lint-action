@@ -1,19 +1,18 @@
 {
   "compilerOptions": {
-    "allowJs": false,
+    "target": "es2015",
+    "module": "commonjs",
+    "outDir": "./lib",
+    "rootDir": "./src",
+    "strict": true,
+    "noImplicitAny": true, 
     "esModuleInterop": true,
-    "lib": ["ES2019"],
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "allowJs": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "dist",
     "removeComments": true,
-    "rootDir": "./src",
-    "strict": true,
-    "target": "ES2019"
   },
   "exclude": ["node_modules"]
 }
