@@ -1,9 +1,8 @@
-import { OctokitResponse, PullsListReviewsResponseData } from "@octokit/types";
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 
 const repoTokenInput = core.getInput("repo-token", { required: true });
-const githubClient = github.getOctokit(repoTokenInput);
+const octokit = github.getOctokit(repoTokenInput);
 
 const titleRegexInput: string = core.getInput("title-regex", {
   required: true,
@@ -52,7 +51,7 @@ function createReview(
   comment: string,
   pullRequest: { owner: string; repo: string; number: number }
 ) {
-  void githubClient.pulls.createReview({
+  void octokit.rest.pulls.createReview({
     owner: pullRequest.owner,
     repo: pullRequest.repo,
     pull_number: pullRequest.number,
@@ -66,7 +65,7 @@ async function dismissReview(pullRequest: {
   repo: string;
   number: number;
 }) {
-  const reviews: OctokitResponse<PullsListReviewsResponseData> = await githubClient.pulls.listReviews(
+  const reviews = await octokit.rest.pulls.listReviews(
     {
       owner: pullRequest.owner,
       repo: pullRequest.repo,
@@ -75,12 +74,13 @@ async function dismissReview(pullRequest: {
   );
 
   reviews.data.forEach(
-    (review: { id: number; user: { login: string }; state: string }) => {
+    (review: { id: number; user: { login: string } | null; state: string }) => {
       if (
+        review.user != null &&
         isGitHubActionUser(review.user.login) &&
         alreadyRequiredChanges(review.state)
       ) {
-        void githubClient.pulls.dismissReview({
+        void octokit.rest.pulls.dismissReview({
           owner: pullRequest.owner,
           repo: pullRequest.repo,
           pull_number: pullRequest.number,

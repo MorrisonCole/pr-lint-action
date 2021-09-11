@@ -1,6 +1,10 @@
 # Pull Request Linter [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-A GitHub Action to ensure that your PR title matches a given regex.
+:octocat: A fast 🔥 TypeScript GitHub Action to ensure that your PR title matches a given regex.
+
+Supports the following feedback mechanisms 🛠:
+* 🤖 Review, request/dismiss changes, and comment with bot
+* ❌ Fail action
 
 ## Usage
 
@@ -22,7 +26,7 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.5.0
+      - uses: morrisoncole/pr-lint-action@v1.5.1
         with:
           title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
@@ -34,6 +38,13 @@ jobs:
 ```
 
 ## Changelog
+
+### v1.5.1
+
+Internal refactoring only:
+
+- Migrate to Yarn 2.
+- Upgrade dependencies.
 
 ### v1.5.0
 

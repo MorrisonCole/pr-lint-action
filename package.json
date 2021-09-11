@@ -4,7 +4,7 @@
   "description": "A GitHub Action to ensure that your PR title matches a given regex.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build --source-map --license licenses.txt",
+    "build": "ncc build src/main.ts --source-map --license licenses.txt --out dist",
     "lint:eslint": "eslint . --ext .ts",
     "lint:prettier": "prettier \"**/*.{ts,md,json,yml}\" --write"
   },
@@ -25,17 +25,18 @@
   },
   "homepage": "https://github.com/MorrisonCole/pr-lint-action#readme",
   "dependencies": {
-    "@actions/core": "1.2.6",
-    "@actions/github": "4.0.0"
+    "@actions/core": "1.5.0",
+    "@actions/github": "5.0.0"
   },
   "devDependencies": {
-    "@types/node": "14.14.8",
-    "@typescript-eslint/eslint-plugin": "4.8.1",
-    "@typescript-eslint/parser": "4.8.1",
-    "@vercel/ncc": "0.25.1",
-    "eslint": "7.13.0",
-    "eslint-config-prettier": "6.15.0",
-    "prettier": "2.1.2",
-    "typescript": "4.0.5"
-  }
+    "@types/node": "16.9.1",
+    "@typescript-eslint/eslint-plugin": "4.31.0",
+    "@typescript-eslint/parser": "4.31.0",
+    "@vercel/ncc": "0.31.0",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "8.3.0",
+    "prettier": "2.4.0",
+    "typescript": "4.4.3"
+  },
+  "packageManager": "yarn@3.0.2"
 }

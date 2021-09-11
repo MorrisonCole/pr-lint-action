@@ -1,5 +1,12 @@
 # JetBrains
 .idea/
 
-# Packages
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
 node_modules
