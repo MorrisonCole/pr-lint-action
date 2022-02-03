@@ -1,12 +1,12 @@
-name: Build & Test
+name: Build & Package
 
 on:
   push:
-    branches-filter:
+    branches:
       - main
 
 jobs:
-  package-dry-run:
+  package:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,3 +16,5 @@ jobs:
           yarn --immutable
           yarn build
           yarn package
+          git add lib/ dist/
+          git diff-index --quiet HEAD || (git commit -m "[skip ci] package" && git push)
