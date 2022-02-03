@@ -1,13 +1,21 @@
-name: Build
+name: Build & Package
 
-on:
-  push:
-    branches-ignore:
-      - main
-
+on: push
 jobs:
-  build:
+  plan-package:
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          yarn --immutable
+          yarn build
+          yarn package
+  package:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
       - run: |
