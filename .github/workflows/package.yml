@@ -17,4 +17,4 @@ jobs:
           yarn build
           yarn package
           git add lib/ dist/
-          git diff-index --quiet HEAD || (git commit -m "[skip ci] package" && git push)
+          git diff-index --quiet HEAD
