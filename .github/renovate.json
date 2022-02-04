@@ -4,10 +4,6 @@
   "prConcurrentLimit": 1,
   "prHourlyLimit": 0,
   "automerge": false,
-  "packageRules": [
-    {
-      "updateTypes": ["minor", "patch", "pin", "digest"]
-    }
-  ],
+  "packageRules": [{ "matchUpdateTypes": ["minor", "patch", "pin", "digest"] }],
   "labels": ["automerge", "dependencies"]
 }

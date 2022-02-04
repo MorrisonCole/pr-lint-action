@@ -1,10 +1,12 @@
 # Pull Request Linter [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-:octocat: A fast 🔥 TypeScript GitHub Action to ensure that your PR title matches a given regex.
+:octocat: A fast 🔥 TypeScript GitHub Action to ensure that your PR title
+matches a given regex.
 
 Supports the following feedback mechanisms 🛠:
-* 🤖 Review, request/dismiss changes, and comment with bot
-* ❌ Fail action
+
+- 🤖 Review, request/dismiss changes, and comment with bot
+- ❌ Fail action
 
 ## Usage
 
@@ -137,6 +139,10 @@ being.
 
 We package everything to a single file with Vercel's
 [ncc](https://github.com/vercel/ncc). Outputs to `dist/index.js`.
+
+### Validate Renovate Config
+
+`npx --package renovate -c renovate-config-validator`
 
 ## Related Reading
 
