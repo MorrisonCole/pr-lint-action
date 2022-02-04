@@ -46,6 +46,7 @@ const onFailedRegexCreateReviewInput = core.getInput("on-failed-regex-create-rev
 const onFailedRegexCommentInput = core.getInput("on-failed-regex-comment");
 const onFailedRegexFailActionInput = core.getInput("on-failed-regex-fail-action") == "true";
 const onFailedRegexRequestChanges = core.getInput("on-failed-regex-request-changes") == "true";
+const onSucceededRegexDismissReviewComment = core.getInput("on-succeeded-regex-dismiss-review-comment");
 function run() {
     var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
@@ -97,7 +98,7 @@ function dismissReview(pullRequest) {
                     repo: pullRequest.repo,
                     pull_number: pullRequest.number,
                     review_id: review.id,
-                    message: "All good!",
+                    message: onSucceededRegexDismissReviewComment,
                 });
             }
         });

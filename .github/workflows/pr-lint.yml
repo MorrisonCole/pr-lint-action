@@ -6,7 +6,7 @@ on:
     # explicity override here so that PR titles are re-linted when the PR text content is edited.
     #
     # Possible values: https://help.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-event-pull_request
-    types: [opened, edited, reopened]
+    types: [opened, edited, reopened, synchronize]
 
 jobs:
   pr-lint:
@@ -20,4 +20,6 @@ jobs:
           on-failed-regex-request-changes: false
           on-failed-regex-comment:
             "This is just an example. Failed regex: `%regex%`!"
+          on-succeeded-regex-dismiss-review-comment:
+            "This is just an example. Success!"
           repo-token: "${{ secrets.GITHUB_TOKEN }}"

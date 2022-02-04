@@ -30,6 +30,12 @@ inputs:
       "Whether the action should request changes or just provide a comment."
     required: false
     default: true
+  on-succeeded-regex-dismiss-review-comment:
+    description:
+      "Comment for the bot to post on PRs that succeed the regex and have their
+      review dismissed."
+    required: false
+    default: "All good!"
   repo-token:
     description:
       "Github token with access to the repository (secrets.GITHUB_TOKEN)."
