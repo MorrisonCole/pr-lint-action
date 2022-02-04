@@ -35,5 +35,5 @@ inputs:
       "Github token with access to the repository (secrets.GITHUB_TOKEN)."
     required: true
 runs:
-  using: "node12"
+  using: "node16"
   main: "dist/index.js"
