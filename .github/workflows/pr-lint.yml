@@ -20,4 +20,6 @@ jobs:
           on-failed-regex-request-changes: false
           on-failed-regex-comment:
             "This is just an example. Failed regex: `%regex%`!"
+          on-succeeded-regex-dismiss-review-comment:
+            "This is just an example. Success!"
           repo-token: "${{ secrets.GITHUB_TOKEN }}"

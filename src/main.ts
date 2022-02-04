@@ -16,6 +16,9 @@ const onFailedRegexFailActionInput: boolean =
   core.getInput("on-failed-regex-fail-action") == "true";
 const onFailedRegexRequestChanges: boolean =
   core.getInput("on-failed-regex-request-changes") == "true";
+const onSucceededRegexDismissReviewComment: string = core.getInput(
+  "on-succeeded-regex-dismiss-review-comment"
+);
 
 async function run(): Promise<void> {
   const githubContext = github.context;
@@ -65,13 +68,11 @@ async function dismissReview(pullRequest: {
   repo: string;
   number: number;
 }) {
-  const reviews = await octokit.rest.pulls.listReviews(
-    {
-      owner: pullRequest.owner,
-      repo: pullRequest.repo,
-      pull_number: pullRequest.number,
-    }
-  );
+  const reviews = await octokit.rest.pulls.listReviews({
+    owner: pullRequest.owner,
+    repo: pullRequest.repo,
+    pull_number: pullRequest.number,
+  });
 
   reviews.data.forEach(
     (review: { id: number; user: { login: string } | null; state: string }) => {
@@ -85,7 +86,7 @@ async function dismissReview(pullRequest: {
           repo: pullRequest.repo,
           pull_number: pullRequest.number,
           review_id: review.id,
-          message: "All good!",
+          message: onSucceededRegexDismissReviewComment,
         });
       }
     }
