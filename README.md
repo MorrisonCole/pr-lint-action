@@ -22,13 +22,13 @@ on:
     # explicity override here so that PR titles are re-linted when the PR text content is edited.
     #
     # Possible values: https://help.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-event-pull_request
-    types: [opened, edited, reopened]
+    types: [opened, edited, reopened, synchronize]
 
 jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.5.1
+      - uses: morrisoncole/pr-lint-action@v1.6.0
         with:
           title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
@@ -36,10 +36,24 @@ jobs:
           on-failed-regex-create-review: true
           on-failed-regex-comment:
             "This is just an example. Failed regex: `%regex%`!"
+          on-succeeded-regex-dismiss-review-comment:
+            "This is just an example. Success!"
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
 ## Changelog
+
+### v1.6.0
+
+- Updated documentation to recommend running the action on PR `synchronize`
+  events too, so that the checks won't go stale. The action will no longer post
+  extra comments for subsequent pushes.
+- Fixes [#175](https://github.com/MorrisonCole/pr-lint-action/issues/175): can
+  now customize the success message when reviews are dismissed using
+  `on-succeeded-regex-dismiss-review-comment`.
+- Fixes [#171](https://github.com/MorrisonCole/pr-lint-action/issues/171): run
+  action with Node 16.
+- Upgrade dependencies.
 
 ### v1.5.1
 
