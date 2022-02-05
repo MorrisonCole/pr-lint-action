@@ -54,13 +54,15 @@ function createReview(
   comment: string,
   pullRequest: { owner: string; repo: string; number: number }
 ) {
-  void octokit.rest.pulls.createReview({
-    owner: pullRequest.owner,
-    repo: pullRequest.repo,
-    pull_number: pullRequest.number,
-    body: comment,
-    event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
-  });
+  if (github.context.eventName !== "push") {
+    void octokit.rest.pulls.createReview({
+      owner: pullRequest.owner,
+      repo: pullRequest.repo,
+      pull_number: pullRequest.number,
+      body: comment,
+      event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
+    });
+  }
 }
 
 async function dismissReview(pullRequest: {
