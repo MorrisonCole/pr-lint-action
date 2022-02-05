@@ -74,7 +74,7 @@ function run() {
     });
 }
 function createReview(comment, pullRequest) {
-    if (github.context.eventName !== "push") {
+    if (github.context.eventName === "pull_request") {
         void octokit.rest.pulls.createReview({
             owner: pullRequest.owner,
             repo: pullRequest.repo,

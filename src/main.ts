@@ -54,7 +54,7 @@ function createReview(
   comment: string,
   pullRequest: { owner: string; repo: string; number: number }
 ) {
-  if (github.context.eventName !== "push") {
+  if (github.context.eventName === "pull_request") {
     void octokit.rest.pulls.createReview({
       owner: pullRequest.owner,
       repo: pullRequest.repo,
