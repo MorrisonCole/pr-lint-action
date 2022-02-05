@@ -46,8 +46,7 @@ jobs:
 ### v1.6.0
 
 - Updated documentation to recommend running the action on PR `synchronize`
-  events too, so that the checks won't go stale. The action will no longer post
-  extra comments for subsequent pushes.
+  events too, so that the checks won't go stale.
 - Fixes [#175](https://github.com/MorrisonCole/pr-lint-action/issues/175): can
   now customize the success message when reviews are dismissed using
   `on-succeeded-regex-dismiss-review-comment`.
