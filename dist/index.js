@@ -74,13 +74,15 @@ function run() {
     });
 }
 function createReview(comment, pullRequest) {
-    void octokit.rest.pulls.createReview({
-        owner: pullRequest.owner,
-        repo: pullRequest.repo,
-        pull_number: pullRequest.number,
-        body: comment,
-        event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
-    });
+    if (github.context.eventName !== "push") {
+        void octokit.rest.pulls.createReview({
+            owner: pullRequest.owner,
+            repo: pullRequest.repo,
+            pull_number: pullRequest.number,
+            body: comment,
+            event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
+        });
+    }
 }
 function dismissReview(pullRequest) {
     return __awaiter(this, void 0, void 0, function* () {
