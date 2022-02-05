@@ -131,13 +131,13 @@ being.
 
 ## Developing
 
-### Build
+### Build & Package
 
 `yarn install`
 
 `yarn build`
 
-We package everything to a single file with Vercel's
+`yarn package`: We package everything to a single file with Vercel's
 [ncc](https://github.com/vercel/ncc). Outputs to `dist/index.js`.
 
 ### Validate Renovate Config
