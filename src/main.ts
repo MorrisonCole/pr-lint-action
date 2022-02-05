@@ -54,15 +54,13 @@ function createReview(
   comment: string,
   pullRequest: { owner: string; repo: string; number: number }
 ) {
-  if (github.context.eventName === "pull_request") {
-    void octokit.rest.pulls.createReview({
-      owner: pullRequest.owner,
-      repo: pullRequest.repo,
-      pull_number: pullRequest.number,
-      body: comment,
-      event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
-    });
-  }
+  void octokit.rest.pulls.createReview({
+    owner: pullRequest.owner,
+    repo: pullRequest.repo,
+    pull_number: pullRequest.number,
+    body: comment,
+    event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
+  });
 }
 
 async function dismissReview(pullRequest: {
