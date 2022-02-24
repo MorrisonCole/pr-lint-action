@@ -44,8 +44,11 @@ async function run(): Promise<void> {
       core.setFailed(comment);
     }
   } else {
+    core.debug(`Regex pass`);
     if (onFailedRegexCreateReviewInput) {
+      core.debug(`Dismissing review`);
       await dismissReview(pullRequest);
+      core.debug(`Review dimissed`);
     }
   }
 }
