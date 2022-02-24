@@ -104,7 +104,9 @@ function isGitHubActionUser(login: string) {
 }
 
 function alreadyRequiredChanges(state: string) {
-  const stateIsChangesRequested = state == "CHANGES_REQUESTED";
+  // If on-failed-regex-request-changes is set to be true state will be CHANGES_REQUESTED
+  // otherwise the bot will just comment and the state will be COMMENTED
+  const stateIsChangesRequested = state == "CHANGES_REQUESTED" || state === "COMMENTED";
   core.debug(`alreadyRequiredChanges output: ${stateIsChangesRequested} (state is: ${state})`);
   return stateIsChangesRequested;
 }

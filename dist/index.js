@@ -114,7 +114,7 @@ function isGitHubActionUser(login) {
     return gitHubUser;
 }
 function alreadyRequiredChanges(state) {
-    const stateIsChangesRequested = state == "CHANGES_REQUESTED";
+    const stateIsChangesRequested = state == "CHANGES_REQUESTED" || state === "COMMENTED";
     core.debug(`alreadyRequiredChanges output: ${stateIsChangesRequested} (state is: ${state})`);
     return stateIsChangesRequested;
 }
