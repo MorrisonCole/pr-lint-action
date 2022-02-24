@@ -81,6 +81,7 @@ async function dismissReview(pullRequest: {
         isGitHubActionUser(review.user.login) &&
         alreadyRequiredChanges(review.state)
       ) {
+        core.debug(`Found review to dismiss`);
         void octokit.rest.pulls.dismissReview({
           owner: pullRequest.owner,
           repo: pullRequest.repo,
@@ -94,11 +95,15 @@ async function dismissReview(pullRequest: {
 }
 
 function isGitHubActionUser(login: string) {
-  return login == "github-actions[bot]";
+  const gitHubUser = login == "github-actions[bot]";
+  core.debug(`isGitHubActionUser output: ${gitHubUser} (login is: ${login})`);
+  return gitHubUser;
 }
 
 function alreadyRequiredChanges(state: string) {
-  return state == "CHANGES_REQUESTED";
+  const stateIsChangesRequested = state == "CHANGES_REQUESTED";
+  core.debug(`alreadyRequiredChanges output: ${stateIsChangesRequested} (state is: ${state})`);
+  return stateIsChangesRequested;
 }
 
 run().catch((error) => {
