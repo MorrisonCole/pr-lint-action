@@ -8,14 +8,14 @@ const titleRegexInput: string = core.getInput("title-regex", {
   required: true,
 });
 const onFailedRegexCreateReviewInput: boolean =
-  core.getInput("on-failed-regex-create-review") == "true";
+  core.getInput("on-failed-regex-create-review") === "true";
 const onFailedRegexCommentInput: string = core.getInput(
   "on-failed-regex-comment"
 );
 const onFailedRegexFailActionInput: boolean =
-  core.getInput("on-failed-regex-fail-action") == "true";
+  core.getInput("on-failed-regex-fail-action") === "true";
 const onFailedRegexRequestChanges: boolean =
-  core.getInput("on-failed-regex-request-changes") == "true";
+  core.getInput("on-failed-regex-request-changes") === "true";
 const onSucceededRegexDismissReviewComment: string = core.getInput(
   "on-succeeded-regex-dismiss-review-comment"
 );
@@ -85,7 +85,7 @@ async function dismissReview(pullRequest: {
         alreadyRequiredChanges(review.state)
       ) {
         core.debug(`Already required changes`);
-        if (review.state == "COMMENTED") {
+        if (review.state === "COMMENTED") {
           octokit.rest.issues.createComment({
             owner: pullRequest.owner,
             repo: pullRequest.repo,
@@ -107,7 +107,7 @@ async function dismissReview(pullRequest: {
 }
 
 function isGitHubActionUser(login: string) {
-  const gitHubUser = login == "github-actions[bot]";
+  const gitHubUser = login === "github-actions[bot]";
   core.debug(`isGitHubActionUser output: ${gitHubUser} (login is: ${login})`);
   return gitHubUser;
 }
@@ -115,7 +115,8 @@ function isGitHubActionUser(login: string) {
 function alreadyRequiredChanges(state: string) {
   // If on-failed-regex-request-changes is set to be true state will be CHANGES_REQUESTED
   // otherwise the bot will just comment and the state will be COMMENTED.
-  const requiredChanges = state == "CHANGES_REQUESTED" || state === "COMMENTED";
+  const requiredChanges =
+    state === "CHANGES_REQUESTED" || state === "COMMENTED";
   core.debug(
     `alreadyRequiredChanges output: ${requiredChanges} (state is: ${state})`
   );
