@@ -67,8 +67,11 @@ function run() {
             }
         }
         else {
+            core.debug(`Regex pass`);
             if (onFailedRegexCreateReviewInput) {
+                core.debug(`Dismissing review`);
                 yield dismissReview(pullRequest);
+                core.debug(`Review dimissed`);
             }
         }
     });
@@ -93,22 +96,37 @@ function dismissReview(pullRequest) {
             if (review.user != null &&
                 isGitHubActionUser(review.user.login) &&
                 alreadyRequiredChanges(review.state)) {
-                void octokit.rest.pulls.dismissReview({
-                    owner: pullRequest.owner,
-                    repo: pullRequest.repo,
-                    pull_number: pullRequest.number,
-                    review_id: review.id,
-                    message: onSucceededRegexDismissReviewComment,
-                });
+                core.debug(`Already required changes`);
+                if (review.state == "COMMENTED") {
+                    octokit.rest.issues.createComment({
+                        owner: pullRequest.owner,
+                        repo: pullRequest.repo,
+                        issue_number: pullRequest.number,
+                        body: onSucceededRegexDismissReviewComment,
+                    });
+                }
+                else {
+                    octokit.rest.pulls.dismissReview({
+                        owner: pullRequest.owner,
+                        repo: pullRequest.repo,
+                        pull_number: pullRequest.number,
+                        review_id: review.id,
+                        message: onSucceededRegexDismissReviewComment,
+                    });
+                }
             }
         });
     });
 }
 function isGitHubActionUser(login) {
-    return login == "github-actions[bot]";
+    const gitHubUser = login == "github-actions[bot]";
+    core.debug(`isGitHubActionUser output: ${gitHubUser} (login is: ${login})`);
+    return gitHubUser;
 }
 function alreadyRequiredChanges(state) {
-    return state == "CHANGES_REQUESTED";
+    const requiredChanges = state == "CHANGES_REQUESTED" || state === "COMMENTED";
+    core.debug(`alreadyRequiredChanges output: ${requiredChanges} (state is: ${state})`);
+    return requiredChanges;
 }
 run().catch((error) => {
     core.setFailed(error);
