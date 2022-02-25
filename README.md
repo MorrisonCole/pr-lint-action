@@ -28,7 +28,7 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.6.0
+      - uses: morrisoncole/pr-lint-action@v1.6.1
         with:
           title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
@@ -42,6 +42,13 @@ jobs:
 ```
 
 ## Changelog
+
+### v1.6.0
+
+- Fixes [#266](https://github.com/MorrisonCole/pr-lint-action/issues/266): the
+  success comment will now be created once the PR Lint succeeds, even when
+  `on-failed-regex-create-review` is set to false. Thank you @talboren for
+  reporting, debugging, and fixing this! 💪
 
 ### v1.6.0
 
