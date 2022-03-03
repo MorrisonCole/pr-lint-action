@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MorrisonCole/pr-lint-action"
+    "url": "git+https://github.com/dyte-in/pr-lint-action"
   },
   "keywords": [
     "actions",
@@ -21,6 +21,9 @@
     "lint"
   ],
   "author": "Morrison Cole <admin@morrisoncole.co.uk>",
+  "contributors": [
+    "Amogh Lele 'SphericalKat' <amogh@dyte.io>"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MorrisonCole/pr-lint-action/issues"
