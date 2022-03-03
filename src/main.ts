@@ -7,6 +7,8 @@ const octokit = github.getOctokit(repoTokenInput);
 const titleRegexInput: string = core.getInput("title-regex", {
   required: true,
 });
+const titleRegexInputFlags: string = core.getInput("title-regex-flags");
+
 const onFailedRegexCreateReviewInput: boolean =
   core.getInput("on-failed-regex-create-review") === "true";
 const onFailedRegexCommentInput: string = core.getInput(
@@ -24,7 +26,7 @@ async function run(): Promise<void> {
   const githubContext = github.context;
   const pullRequest = githubContext.issue;
 
-  const titleRegex = new RegExp(titleRegexInput);
+  const titleRegex = new RegExp(titleRegexInput, titleRegexInputFlags ? titleRegexInputFlags : undefined);
   const title: string =
     (githubContext.payload.pull_request?.title as string) ?? "";
   const comment = onFailedRegexCommentInput.replace(
