@@ -47,6 +47,7 @@ async function run(): Promise<void> {
     if (onFailedRegexFailActionInput) {
       core.setFailed(comment);
     }
+    core.debug(`Failing title: ${title}`);
   } else {
     core.debug(`Regex pass`);
     if (onFailedRegexCreateReviewInput) {
@@ -65,6 +66,7 @@ async function run(): Promise<void> {
       if (onFailedRegexFailActionInput) {
         core.setFailed(comment);
       }
+      core.debug(`Failing body: ${body}`);
     } else {
       core.debug(`Regex pass`);
       if (onFailedRegexCreateReviewInput) {
