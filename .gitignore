@@ -1,6 +1,9 @@
 # JetBrains
 .idea/
 
+# VSCode
+.vscode/
+
 # Yarn
 .yarn/*
 !.yarn/patches

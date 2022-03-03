@@ -9,6 +9,10 @@ inputs:
     description: "Regex to ensure PR title matches. Allows anything by default."
     required: true
     default: ".*"
+  body-regex:
+    description: "Regex to ensure a match is found in the body. Allows anything by default."
+    required: false
+    default: ".*"
   on-failed-regex-create-review:
     description:
       "Whether the action should create a PR review & comment when the regex
