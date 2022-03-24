@@ -43,7 +43,7 @@ jobs:
 
 ## Changelog
 
-### v1.6.0
+### v1.6.1
 
 - Fixes [#266](https://github.com/MorrisonCole/pr-lint-action/issues/266): the
   success comment will now be created once the PR Lint succeeds, even when
