@@ -86,12 +86,14 @@ async function dismissReview(pullRequest: {
       ) {
         core.debug(`Already required changes`);
         if (review.state === "COMMENTED") {
-          octokit.rest.issues.createComment({
-            owner: pullRequest.owner,
-            repo: pullRequest.repo,
-            issue_number: pullRequest.number,
-            body: onSucceededRegexDismissReviewComment,
-          });
+          if (onSucceededRegexDismissReviewComment) {
+            octokit.rest.issues.createComment({
+              owner: pullRequest.owner,
+              repo: pullRequest.repo,
+              issue_number: pullRequest.number,
+              body: onSucceededRegexDismissReviewComment,
+            });
+          }
         } else {
           octokit.rest.pulls.dismissReview({
             owner: pullRequest.owner,
