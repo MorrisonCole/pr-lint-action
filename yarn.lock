@@ -294,10 +294,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.29":
-  version: 16.11.29
-  resolution: "@types/node@npm:16.11.29"
-  checksum: efb3a716a638baa7bf8f281d8f91102a7df452804f4cfbdd3a0f36d581cddc56446eac6b1ed041e27841f316de5d858080f98516ccf306fda9d6f8c3c68c2e17
+"@types/node@npm:16.11.30":
+  version: 16.11.30
+  resolution: "@types/node@npm:16.11.30"
+  checksum: 2195096506bf21290213ba0b2db99c89bd611c8ba5e0aa3455239980a6bb708dd84d705fba8c180fdb07dcb502c1957db703a4562b31ee85bf0427e01178fd85
   languageName: node
   linkType: hard
 
@@ -1740,7 +1740,7 @@ __metadata:
   dependencies:
     "@actions/core": 1.7.0
     "@actions/github": 5.0.1
-    "@types/node": 16.11.29
+    "@types/node": 16.11.30
     "@typescript-eslint/eslint-plugin": 5.21.0
     "@typescript-eslint/parser": 5.21.0
     "@vercel/ncc": 0.33.4
