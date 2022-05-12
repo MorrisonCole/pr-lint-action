@@ -5,12 +5,12 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@actions/core@npm:1.8.0":
-  version: 1.8.0
-  resolution: "@actions/core@npm:1.8.0"
+"@actions/core@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@actions/core@npm:1.8.1"
   dependencies:
-    "@actions/http-client": ^1.0.11
-  checksum: 0634770fce3fdf56fd76338731921fde67dcea54cba7e5be2398d62445ada2ee8afca6694da1c6f72d9b4d257cbf3ed0dacbd58753adac712e06249f57156cf3
+    "@actions/http-client": ^2.0.0
+  checksum: 9a3758528e32a951d457cf29494125360251a3631bc63af9465895ab5749a55b85db043226c39c260b8d931c16a237156051e40a7351d484ab2f7249f82fa3bf
   languageName: node
   linkType: hard
 
@@ -32,6 +32,13 @@ __metadata:
   dependencies:
     tunnel: 0.0.6
   checksum: 2c72834ec36a121ae95d2cb61fd28234eae2ab265a2aefe857a9eeb788ea77b284ad727ecd3c67fefd1920d5f2800b6c1ba6916b39d44f81f293b4b0020d367c
+  languageName: node
+  linkType: hard
+
+"@actions/http-client@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@actions/http-client@npm:2.0.0"
+  checksum: ac0818271563f3608601a4781014a2df98be4324adac43572509846066e64329637c2f4982624de99ff1df4a92911d393f5978ae3a779e26639e031dba593e6f
   languageName: node
   linkType: hard
 
@@ -1747,7 +1754,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "pr-lint-action@workspace:."
   dependencies:
-    "@actions/core": 1.8.0
+    "@actions/core": 1.8.1
     "@actions/github": 5.0.1
     "@types/node": 16.11.34
     "@typescript-eslint/eslint-plugin": 5.23.0
