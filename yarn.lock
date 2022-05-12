@@ -14,24 +14,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@actions/github@npm:5.0.1":
-  version: 5.0.1
-  resolution: "@actions/github@npm:5.0.1"
+"@actions/github@npm:5.0.2":
+  version: 5.0.2
+  resolution: "@actions/github@npm:5.0.2"
   dependencies:
-    "@actions/http-client": ^1.0.11
+    "@actions/http-client": ^2.0.0
     "@octokit/core": ^3.6.0
     "@octokit/plugin-paginate-rest": ^2.17.0
     "@octokit/plugin-rest-endpoint-methods": ^5.13.0
-  checksum: 4c8541cbe8332a616a405c84a67566c2e0ef07f401967ab72f8e3608e68bbc73f94bff1b002d28147a58f812e9546b475f58629514532882f59200073b80bd0b
-  languageName: node
-  linkType: hard
-
-"@actions/http-client@npm:^1.0.11":
-  version: 1.0.11
-  resolution: "@actions/http-client@npm:1.0.11"
-  dependencies:
-    tunnel: 0.0.6
-  checksum: 2c72834ec36a121ae95d2cb61fd28234eae2ab265a2aefe857a9eeb788ea77b284ad727ecd3c67fefd1920d5f2800b6c1ba6916b39d44f81f293b4b0020d367c
+  checksum: fb6c4cda9e55d10533ad091b0d001c13083057c127fcc7d6c287c0ae35d7a5f78eecd829c57a1224880d109a943d4a788c019215bde8ff4d811b36c5a71b72f9
   languageName: node
   linkType: hard
 
@@ -1755,7 +1746,7 @@ __metadata:
   resolution: "pr-lint-action@workspace:."
   dependencies:
     "@actions/core": 1.8.1
-    "@actions/github": 5.0.1
+    "@actions/github": 5.0.2
     "@types/node": 16.11.34
     "@typescript-eslint/eslint-plugin": 5.23.0
     "@typescript-eslint/parser": 5.23.0
@@ -2099,13 +2090,6 @@ __metadata:
   peerDependencies:
     typescript: ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
   checksum: 1843f4c1b2e0f975e08c4c21caa4af4f7f65a12ac1b81b3b8489366826259323feb3fc7a243123453d2d1a02314205a7634e048d4a8009921da19f99755cdc48
-  languageName: node
-  linkType: hard
-
-"tunnel@npm:0.0.6":
-  version: 0.0.6
-  resolution: "tunnel@npm:0.0.6"
-  checksum: c362948df9ad34b649b5585e54ce2838fa583aa3037091aaed66793c65b423a264e5229f0d7e9a95513a795ac2bd4cb72cda7e89a74313f182c1e9ae0b0994fa
   languageName: node
   linkType: hard
 
