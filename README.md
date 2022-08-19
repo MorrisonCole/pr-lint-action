@@ -31,6 +31,7 @@ jobs:
       - uses: morrisoncole/pr-lint-action@v1.6.1
         with:
           title-regex: "#[eE][xX]-[0-9]+"
+          title-regex-flags: "i"
           on-failed-regex-fail-action: false
           on-failed-regex-request-changes: false
           on-failed-regex-create-review: true
