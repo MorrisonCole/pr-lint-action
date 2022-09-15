@@ -1,33 +1,32 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 
-const repoTokenInput = core.getInput("repo-token", { required: true });
-const octokit = github.getOctokit(repoTokenInput);
-
-const titleRegexInput: string = core.getInput("title-regex", {
+const repoToken = core.getInput("repo-token", { required: true });
+const titleRegex: RegExp = new RegExp(core.getInput("title-regex", {
   required: true,
-});
-const onFailedRegexCreateReviewInput: boolean =
-  core.getInput("on-failed-regex-create-review") === "true";
-const onFailedRegexCommentInput: string = core.getInput(
-  "on-failed-regex-comment"
-);
-const onFailedRegexFailActionInput: boolean =
+}));
+const onFailedRegexFailAction: boolean =
   core.getInput("on-failed-regex-fail-action") === "true";
+const onFailedRegexCreateReview: boolean =
+  core.getInput("on-failed-regex-create-review") === "true";
 const onFailedRegexRequestChanges: boolean =
   core.getInput("on-failed-regex-request-changes") === "true";
+const onFailedRegexComment: string = core.getInput(
+  "on-failed-regex-comment"
+);
 const onSucceededRegexDismissReviewComment: string = core.getInput(
   "on-succeeded-regex-dismiss-review-comment"
 );
+
+const octokit = github.getOctokit(repoToken);
 
 async function run(): Promise<void> {
   const githubContext = github.context;
   const pullRequest = githubContext.issue;
 
-  const titleRegex = new RegExp(titleRegexInput);
   const title: string =
     (githubContext.payload.pull_request?.title as string) ?? "";
-  const comment = onFailedRegexCommentInput.replace(
+  const comment = onFailedRegexComment.replace(
     "%regex%",
     titleRegex.source
   );
@@ -37,15 +36,15 @@ async function run(): Promise<void> {
 
   const titleMatchesRegex: boolean = titleRegex.test(title);
   if (!titleMatchesRegex) {
-    if (onFailedRegexCreateReviewInput) {
+    if (onFailedRegexCreateReview) {
       createReview(comment, pullRequest);
     }
-    if (onFailedRegexFailActionInput) {
+    if (onFailedRegexFailAction) {
       core.setFailed(comment);
     }
   } else {
     core.debug(`Regex pass`);
-    if (onFailedRegexCreateReviewInput) {
+    if (onFailedRegexCreateReview) {
       core.debug(`Dismissing review`);
       await dismissReview(pullRequest);
       core.debug(`Review dimissed`);
@@ -112,7 +111,8 @@ function isGitHubActionUser(login: string) {
   return gitHubUser;
 }
 
-function alreadyRequiredChanges(state: string) {
+// See: https://docs.github.com/en/graphql/reference/enums#pullrequestreviewstate
+export const alreadyRequiredChanges = (state: string) => {
   // If on-failed-regex-request-changes is set to be true state will be CHANGES_REQUESTED
   // otherwise the bot will just comment and the state will be COMMENTED.
   const requiredChanges =
@@ -121,7 +121,7 @@ function alreadyRequiredChanges(state: string) {
     `alreadyRequiredChanges output: ${requiredChanges} (state is: ${state})`
   );
   return requiredChanges;
-}
+};
 
 run().catch((error) => {
   core.setFailed(error);

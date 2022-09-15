@@ -30,16 +30,28 @@ jobs:
     steps:
       - uses: morrisoncole/pr-lint-action@v1.6.1
         with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
           title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
-          on-failed-regex-request-changes: false
           on-failed-regex-create-review: true
+          on-failed-regex-request-changes: false
           on-failed-regex-comment:
             "This is just an example. Failed regex: `%regex%`!"
           on-succeeded-regex-dismiss-review-comment:
             "This is just an example. Success!"
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
+
+## Options
+
+| Option                                      | Required? | Type   | Default Value | Description                                                                                                                                              |
+| ------------------------------------------- | --------- | ------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `repo-token`                                | yes       | string | N/A           | [About the `GITHUB_TOKEN` secret](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret).      |
+| `title-regex`                               | yes       | string | N/A           | A JavaScript regex to test the title of each Pull Request against.                                                                                       |
+| `on-failed-regex-fail-action`               | no        | bool   | true          | If the regex fails, sets the action status to failed. When the action exits it will be with an exit code of 1.                                           |
+| `on-failed-regex-create-review`             | no        | bool   | true          | If the regex fails, uses the GitHub review mechanism to submit a review. The review type is determined by `on-failed-regex-request-changes`.             |
+| `on-failed-regex-request-changes`           | no        | bool   | true          | Uses 'Request Changes' when creating a review. Otherwise, uses 'Comment'. _Note:_ if `on-failed-regex-create-review` is `false`, this won't do anything. |
+| `on-failed-regex-comment`                   | no        | string | ""            | The message to post as a review comment (or the console output if `on-failed-regex-create-review` is `false`) when the regex fails.                      |
+| `on-succeeded-regex-dismiss-review-comment` | no        | string | ""            | The message to post as a comment when the regex succeeds after previously failing.                                                                       |
 
 ## Changelog
 
