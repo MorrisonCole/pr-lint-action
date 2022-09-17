@@ -114,6 +114,7 @@ const getExistingReview = async (pullRequest: {
   repo: string;
   number: number;
 }) => {
+  core.debug(`getting reviews`);
   const reviews = await octokit.rest.pulls.listReviews({
     owner: pullRequest.owner,
     repo: pullRequest.repo,
