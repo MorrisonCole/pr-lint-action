@@ -103,7 +103,7 @@ function dismissReview(pullRequest) {
                 pull_number: pullRequest.number,
             });
             var existingComment = comments.data.find((_) => {
-                review.user != null && isGitHubActionUser(review.user.login);
+                return review.user != null && isGitHubActionUser(review.user.login);
             });
             if (existingComment === undefined) {
                 core.debug("Found no existing comment.");

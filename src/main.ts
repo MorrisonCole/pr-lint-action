@@ -81,7 +81,7 @@ async function dismissReview(pullRequest: {
 
     var existingComment = comments.data.find(
       (_: { id: number; user: { login: string } | null }) => {
-        review.user != null && isGitHubActionUser(review.user.login);
+        return review.user != null && isGitHubActionUser(review.user.login);
       }
     );
 
