@@ -2,18 +2,18 @@ import * as core from "@actions/core";
 import * as github from "@actions/github";
 
 const repoToken = core.getInput("repo-token", { required: true });
-const titleRegex: RegExp = new RegExp(core.getInput("title-regex", {
-  required: true,
-}));
+const titleRegex: RegExp = new RegExp(
+  core.getInput("title-regex", {
+    required: true,
+  })
+);
 const onFailedRegexFailAction: boolean =
   core.getInput("on-failed-regex-fail-action") === "true";
 const onFailedRegexCreateReview: boolean =
   core.getInput("on-failed-regex-create-review") === "true";
 const onFailedRegexRequestChanges: boolean =
   core.getInput("on-failed-regex-request-changes") === "true";
-const onFailedRegexComment: string = core.getInput(
-  "on-failed-regex-comment"
-);
+const onFailedRegexComment: string = core.getInput("on-failed-regex-comment");
 const onSucceededRegexDismissReviewComment: string = core.getInput(
   "on-succeeded-regex-dismiss-review-comment"
 );
@@ -26,10 +26,7 @@ async function run(): Promise<void> {
 
   const title: string =
     (githubContext.payload.pull_request?.title as string) ?? "";
-  const comment = onFailedRegexComment.replace(
-    "%regex%",
-    titleRegex.source
-  );
+  const comment = onFailedRegexComment.replace("%regex%", titleRegex.source);
 
   core.debug(`Title Regex: ${titleRegex.source}`);
   core.debug(`Title: ${title}`);
@@ -43,11 +40,8 @@ async function run(): Promise<void> {
       core.setFailed(comment);
     }
   } else {
-    core.debug(`Regex pass`);
     if (onFailedRegexCreateReview) {
-      core.debug(`Dismissing review`);
       await dismissReview(pullRequest);
-      core.debug(`Review dimissed`);
     }
   }
 }
@@ -70,57 +64,78 @@ async function dismissReview(pullRequest: {
   repo: string;
   number: number;
 }) {
+  core.debug(`Trying to dismiss review`);
+  const review = await getExistingReview(pullRequest);
+
+  if (review === undefined) {
+    core.debug("Found no existing review.");
+    return;
+  }
+
+  if (review.state === "COMMENTED") {
+    var comments = await octokit.rest.pulls.listReviewComments({
+      owner: pullRequest.owner,
+      repo: pullRequest.repo,
+      pull_number: pullRequest.number,
+    });
+
+    var existingComment = comments.data.find(
+      (_: { id: number; user: { login: string } | null }) => {
+        review.user != null && isGitHubActionUser(review.user.login);
+      }
+    );
+
+    if (existingComment === undefined) {
+      core.debug("Found no existing comment.");
+      return;
+    }
+
+    await octokit.rest.pulls.updateReviewComment({
+      owner: pullRequest.owner,
+      repo: pullRequest.repo,
+      comment_id: existingComment.id,
+      body: onSucceededRegexDismissReviewComment,
+    });
+    core.debug(`Updated comment`);
+  } else {
+    await octokit.rest.pulls.dismissReview({
+      owner: pullRequest.owner,
+      repo: pullRequest.repo,
+      pull_number: pullRequest.number,
+      review_id: review.id,
+      message: onSucceededRegexDismissReviewComment,
+    });
+    core.debug(`Review dimissed`);
+  }
+}
+
+const getExistingReview = async (pullRequest: {
+  owner: string;
+  repo: string;
+  number: number;
+}) => {
   const reviews = await octokit.rest.pulls.listReviews({
     owner: pullRequest.owner,
     repo: pullRequest.repo,
     pull_number: pullRequest.number,
   });
 
-  reviews.data.forEach(
+  return reviews.data.find(
     (review: { id: number; user: { login: string } | null; state: string }) => {
-      if (
-        review.user != null &&
+      review.user != null &&
         isGitHubActionUser(review.user.login) &&
-        alreadyRequiredChanges(review.state)
-      ) {
-        core.debug(`Already required changes`);
-        if (review.state === "COMMENTED") {
-          octokit.rest.issues.createComment({
-            owner: pullRequest.owner,
-            repo: pullRequest.repo,
-            issue_number: pullRequest.number,
-            body: onSucceededRegexDismissReviewComment,
-          });
-        } else {
-          octokit.rest.pulls.dismissReview({
-            owner: pullRequest.owner,
-            repo: pullRequest.repo,
-            pull_number: pullRequest.number,
-            review_id: review.id,
-            message: onSucceededRegexDismissReviewComment,
-          });
-        }
-      }
+        hasReviewedState(review.state);
     }
   );
-}
+};
 
-function isGitHubActionUser(login: string) {
-  const gitHubUser = login === "github-actions[bot]";
-  core.debug(`isGitHubActionUser output: ${gitHubUser} (login is: ${login})`);
-  return gitHubUser;
-}
+const isGitHubActionUser = (login: string) => {
+  return login === "github-actions[bot]";
+};
 
 // See: https://docs.github.com/en/graphql/reference/enums#pullrequestreviewstate
-export const alreadyRequiredChanges = (state: string) => {
-  // If on-failed-regex-request-changes is set to be true state will be CHANGES_REQUESTED
-  // otherwise the bot will just comment and the state will be COMMENTED.
-  const requiredChanges =
-    state === "CHANGES_REQUESTED" || state === "COMMENTED";
-  core.debug(
-    `alreadyRequiredChanges output: ${requiredChanges} (state is: ${state})`
-  );
-  return requiredChanges;
+export const hasReviewedState = (state: string) => {
+  return state === "CHANGES_REQUESTED" || state === "COMMENTED";
 };
 
 run().catch((error) => {
