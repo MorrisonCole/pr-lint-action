@@ -76,12 +76,12 @@ async function dismissReview(pullRequest: {
 
   if (review.state === "COMMENTED") {
     var comments = await octokit.rest.pulls.listReviewComments({
-      owner: GITHUB_ACTIONS_LOGIN,
+      owner: pullRequest.owner,
       repo: pullRequest.repo,
       pull_number: pullRequest.number,
     });
 
-      core.debug(`got reviews: ${JSON.stringify(comments)}`);
+    core.debug(`got comments: ${JSON.stringify(comments)}`);
 
     var existingComment = comments.data.find(
       (_: { id: number; user: { login: string } | null }) => {
