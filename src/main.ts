@@ -75,33 +75,15 @@ async function dismissReview(pullRequest: {
   }
 
   if (review.state === "COMMENTED") {
-    var comments = await octokit.rest.pulls.listCommentsForReview({
+    await octokit.rest.pulls.updateReview({
       owner: pullRequest.owner,
       repo: pullRequest.repo,
       pull_number: pullRequest.number,
-      review_id: review.id
+      review_id: review.id,
+      body: onSucceededRegexDismissReviewComment
     });
 
-    core.debug(`got comments: ${JSON.stringify(comments)}`);
-
-    var existingComment = comments.data.find(
-      (_: { id: number; user: { login: string } | null }) => {
-        return review.user != null && isGitHubActionUser(review.user.login);
-      }
-    );
-
-    if (existingComment === undefined) {
-      core.debug("Found no existing comment.");
-      return;
-    }
-
-    await octokit.rest.pulls.updateReviewComment({
-      owner: pullRequest.owner,
-      repo: pullRequest.repo,
-      comment_id: existingComment.id,
-      body: onSucceededRegexDismissReviewComment,
-    });
-    core.debug(`Updated comment`);
+    core.debug(`Updated review`);
   } else {
     await octokit.rest.pulls.dismissReview({
       owner: pullRequest.owner,
