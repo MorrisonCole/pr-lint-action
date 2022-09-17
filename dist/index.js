@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.hasReviewedState = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
+const GITHUB_ACTIONS_LOGIN = "github-actions[bot]";
 const repoToken = core.getInput("repo-token", { required: true });
 const titleRegex = new RegExp(core.getInput("title-regex", {
     required: true,
@@ -64,7 +65,7 @@ function run() {
         const titleMatchesRegex = titleRegex.test(title);
         if (!titleMatchesRegex) {
             if (onFailedRegexCreateReview) {
-                yield createReview(comment, pullRequest);
+                yield createOrUpdateReview(comment, pullRequest);
             }
             if (onFailedRegexFailAction) {
                 core.setFailed(comment);
@@ -77,8 +78,9 @@ function run() {
         }
     });
 }
-function createReview(comment, pullRequest) {
-    return __awaiter(this, void 0, void 0, function* () {
+const createOrUpdateReview = (comment, pullRequest) => __awaiter(void 0, void 0, void 0, function* () {
+    const review = yield getExistingReview(pullRequest);
+    if (review === undefined) {
         yield octokit.rest.pulls.createReview({
             owner: pullRequest.owner,
             repo: pullRequest.repo,
@@ -86,63 +88,60 @@ function createReview(comment, pullRequest) {
             body: comment,
             event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
         });
-    });
-}
-function dismissReview(pullRequest) {
-    return __awaiter(this, void 0, void 0, function* () {
-        core.debug(`Trying to dismiss review`);
-        const review = yield getExistingReview(pullRequest);
-        if (review === undefined) {
-            core.debug("Found no existing review.");
-            return;
-        }
-        if (review.state === "COMMENTED") {
-            var comments = yield octokit.rest.pulls.listReviewComments({
-                owner: pullRequest.owner,
-                repo: pullRequest.repo,
-                pull_number: pullRequest.number,
-            });
-            var existingComment = comments.data.find((_) => {
-                review.user != null && isGitHubActionUser(review.user.login);
-            });
-            if (existingComment === undefined) {
-                core.debug("Found no existing comment.");
-                return;
-            }
-            yield octokit.rest.pulls.updateReviewComment({
-                owner: pullRequest.owner,
-                repo: pullRequest.repo,
-                comment_id: existingComment.id,
-                body: onSucceededRegexDismissReviewComment,
-            });
-            core.debug(`Updated comment`);
-        }
-        else {
-            yield octokit.rest.pulls.dismissReview({
-                owner: pullRequest.owner,
-                repo: pullRequest.repo,
-                pull_number: pullRequest.number,
-                review_id: review.id,
-                message: onSucceededRegexDismissReviewComment,
-            });
-            core.debug(`Review dimissed`);
-        }
-    });
-}
+    }
+    else {
+        yield octokit.rest.pulls.updateReview({
+            owner: pullRequest.owner,
+            repo: pullRequest.repo,
+            pull_number: pullRequest.number,
+            review_id: review.id,
+            body: comment,
+        });
+    }
+});
+const dismissReview = (pullRequest) => __awaiter(void 0, void 0, void 0, function* () {
+    core.debug(`Trying to get existing review`);
+    const review = yield getExistingReview(pullRequest);
+    if (review === undefined) {
+        core.debug("Found no existing review");
+        return;
+    }
+    if (review.state === "COMMENTED") {
+        yield octokit.rest.pulls.updateReview({
+            owner: pullRequest.owner,
+            repo: pullRequest.repo,
+            pull_number: pullRequest.number,
+            review_id: review.id,
+            body: onSucceededRegexDismissReviewComment,
+        });
+        core.debug(`Updated existing review`);
+    }
+    else {
+        yield octokit.rest.pulls.dismissReview({
+            owner: pullRequest.owner,
+            repo: pullRequest.repo,
+            pull_number: pullRequest.number,
+            review_id: review.id,
+            message: onSucceededRegexDismissReviewComment,
+        });
+        core.debug(`Dismissed existing review`);
+    }
+});
 const getExistingReview = (pullRequest) => __awaiter(void 0, void 0, void 0, function* () {
+    core.debug(`getting reviews`);
     const reviews = yield octokit.rest.pulls.listReviews({
         owner: pullRequest.owner,
         repo: pullRequest.repo,
         pull_number: pullRequest.number,
     });
     return reviews.data.find((review) => {
-        review.user != null &&
+        return (review.user != null &&
             isGitHubActionUser(review.user.login) &&
-            (0, exports.hasReviewedState)(review.state);
+            (0, exports.hasReviewedState)(review.state));
     });
 });
 const isGitHubActionUser = (login) => {
-    return login === "github-actions[bot]";
+    return login === GITHUB_ACTIONS_LOGIN;
 };
 const hasReviewedState = (state) => {
     return state === "CHANGES_REQUESTED" || state === "COMMENTED";
