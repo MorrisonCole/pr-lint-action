@@ -30,6 +30,7 @@ jobs:
     steps:
       - uses: morrisoncole/pr-lint-action@v1.7.0
         with:
+          # Depending on the permissions granted to your `GITHUB_TOKEN`, you may have to create a custom token and add that to your repositories secrets instead. See: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
