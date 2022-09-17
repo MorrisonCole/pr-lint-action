@@ -120,6 +120,8 @@ const getExistingReview = async (pullRequest: {
     pull_number: pullRequest.number,
   });
 
+  core.debug(`got reviews: ${reviews}`)
+
   return reviews.data.find(
     (review: { id: number; user: { login: string } | null; state: string }) => {
       review.user != null &&
