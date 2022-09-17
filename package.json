@@ -1,6 +1,6 @@
 {
   "name": "pr-lint-action",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "A GitHub Action to ensure that your PR title matches a given regex.",
   "main": "lib/main.js",
   "scripts": {

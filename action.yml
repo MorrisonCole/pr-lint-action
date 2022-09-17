@@ -20,7 +20,7 @@ inputs:
       "Comment for the bot to post on PRs that fail the regex. Use %regex% to
       reference regex."
     required: false
-    default: "PR title failed to match %regex%."
+    default: "PR title failed to match %regex%"
   on-failed-regex-fail-action:
     description: "Whether the action should fail when the regex doesn't match."
     required: false
