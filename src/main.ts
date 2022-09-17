@@ -36,7 +36,7 @@ async function run(): Promise<void> {
   const titleMatchesRegex: boolean = titleRegex.test(title);
   if (!titleMatchesRegex) {
     if (onFailedRegexCreateReview) {
-      await createReview(comment, pullRequest);
+      await createOrUpdateReview(comment, pullRequest);
     }
     if (onFailedRegexFailAction) {
       core.setFailed(comment);
@@ -48,29 +48,41 @@ async function run(): Promise<void> {
   }
 }
 
-async function createReview(
+const createOrUpdateReview = async (
   comment: string,
   pullRequest: { owner: string; repo: string; number: number }
-) {
-  await octokit.rest.pulls.createReview({
-    owner: pullRequest.owner,
-    repo: pullRequest.repo,
-    pull_number: pullRequest.number,
-    body: comment,
-    event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
-  });
-}
-
-async function dismissReview(pullRequest: {
-  owner: string;
-  repo: string;
-  number: number;
-}) {
-  core.debug(`Trying to dismiss review`);
+) => {
   const review = await getExistingReview(pullRequest);
 
   if (review === undefined) {
-    core.debug("Found no existing review.");
+    await octokit.rest.pulls.createReview({
+      owner: pullRequest.owner,
+      repo: pullRequest.repo,
+      pull_number: pullRequest.number,
+      body: comment,
+      event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
+    });
+  } else {
+    await octokit.rest.pulls.updateReview({
+      owner: pullRequest.owner,
+      repo: pullRequest.repo,
+      pull_number: pullRequest.number,
+      review_id: review.id,
+      body: comment,
+    });
+  }
+};
+
+const dismissReview = async (pullRequest: {
+  owner: string;
+  repo: string;
+  number: number;
+}) => {
+  core.debug(`Trying to get existing review`);
+  const review = await getExistingReview(pullRequest);
+
+  if (review === undefined) {
+    core.debug("Found no existing review");
     return;
   }
 
@@ -80,10 +92,10 @@ async function dismissReview(pullRequest: {
       repo: pullRequest.repo,
       pull_number: pullRequest.number,
       review_id: review.id,
-      body: onSucceededRegexDismissReviewComment
+      body: onSucceededRegexDismissReviewComment,
     });
 
-    core.debug(`Updated review`);
+    core.debug(`Updated existing review`);
   } else {
     await octokit.rest.pulls.dismissReview({
       owner: pullRequest.owner,
@@ -92,9 +104,9 @@ async function dismissReview(pullRequest: {
       review_id: review.id,
       message: onSucceededRegexDismissReviewComment,
     });
-    core.debug(`Review dimissed`);
+    core.debug(`Dismissed existing review`);
   }
-}
+};
 
 const getExistingReview = async (pullRequest: {
   owner: string;
@@ -110,9 +122,11 @@ const getExistingReview = async (pullRequest: {
 
   return reviews.data.find(
     (review: { user: { login: string } | null; state: string }) => {
-      return review.user != null &&
+      return (
+        review.user != null &&
         isGitHubActionUser(review.user.login) &&
-        hasReviewedState(review.state);
+        hasReviewedState(review.state)
+      );
     }
   );
 };
