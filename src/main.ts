@@ -124,8 +124,8 @@ const getExistingReview = async (pullRequest: {
   core.debug(`got reviews: ${JSON.stringify(reviews)}`);
 
   return reviews.data.find(
-    (review: { id: number; user: { login: string } | null; state: string }) => {
-      review.user != null &&
+    (review: { user: { login: string } | null; state: string }) => {
+      return review.user != null &&
         isGitHubActionUser(review.user.login) &&
         hasReviewedState(review.state);
     }
