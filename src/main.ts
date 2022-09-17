@@ -69,7 +69,6 @@ const createOrUpdateReview = async (
       pull_number: pullRequest.number,
       review_id: review.id,
       body: comment,
-      event: onFailedRegexRequestChanges ? "REQUEST_CHANGES" : "COMMENT",
     });
   }
 };
