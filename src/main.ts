@@ -37,7 +37,7 @@ async function run(): Promise<void> {
   const titleMatchesRegex: boolean = titleRegex.test(title);
   if (!titleMatchesRegex) {
     if (onFailedRegexCreateReview) {
-      createReview(comment, pullRequest);
+      await createReview(comment, pullRequest);
     }
     if (onFailedRegexFailAction) {
       core.setFailed(comment);
@@ -52,11 +52,11 @@ async function run(): Promise<void> {
   }
 }
 
-function createReview(
+async function createReview(
   comment: string,
   pullRequest: { owner: string; repo: string; number: number }
 ) {
-  void octokit.rest.pulls.createReview({
+  await octokit.rest.pulls.createReview({
     owner: pullRequest.owner,
     repo: pullRequest.repo,
     pull_number: pullRequest.number,
