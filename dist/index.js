@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.hasReviewedState = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
+const GITHUB_ACTIONS_LOGIN = "github-actions[bot]";
 const repoToken = core.getInput("repo-token", { required: true });
 const titleRegex = new RegExp(core.getInput("title-regex", {
     required: true,
@@ -98,7 +99,7 @@ function dismissReview(pullRequest) {
         }
         if (review.state === "COMMENTED") {
             var comments = yield octokit.rest.pulls.listReviewComments({
-                owner: pullRequest.owner,
+                owner: GITHUB_ACTIONS_LOGIN,
                 repo: pullRequest.repo,
                 pull_number: pullRequest.number,
             });
@@ -144,7 +145,7 @@ const getExistingReview = (pullRequest) => __awaiter(void 0, void 0, void 0, fun
     });
 });
 const isGitHubActionUser = (login) => {
-    return login === "github-actions[bot]";
+    return login === GITHUB_ACTIONS_LOGIN;
 };
 const hasReviewedState = (state) => {
     return state === "CHANGES_REQUESTED" || state === "COMMENTED";

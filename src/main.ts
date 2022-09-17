@@ -1,6 +1,8 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 
+const GITHUB_ACTIONS_LOGIN = "github-actions[bot]";
+
 const repoToken = core.getInput("repo-token", { required: true });
 const titleRegex: RegExp = new RegExp(
   core.getInput("title-regex", {
@@ -74,7 +76,7 @@ async function dismissReview(pullRequest: {
 
   if (review.state === "COMMENTED") {
     var comments = await octokit.rest.pulls.listReviewComments({
-      owner: pullRequest.owner,
+      owner: GITHUB_ACTIONS_LOGIN,
       repo: pullRequest.repo,
       pull_number: pullRequest.number,
     });
@@ -133,7 +135,7 @@ const getExistingReview = async (pullRequest: {
 };
 
 const isGitHubActionUser = (login: string) => {
-  return login === "github-actions[bot]";
+  return login === GITHUB_ACTIONS_LOGIN;
 };
 
 // See: https://docs.github.com/en/graphql/reference/enums#pullrequestreviewstate
