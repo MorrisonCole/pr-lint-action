@@ -102,6 +102,7 @@ function dismissReview(pullRequest) {
                 repo: pullRequest.repo,
                 pull_number: pullRequest.number,
             });
+            core.debug(`got reviews: ${JSON.stringify(comments)}`);
             var existingComment = comments.data.find((_) => {
                 return review.user != null && isGitHubActionUser(review.user.login);
             });
@@ -136,7 +137,6 @@ const getExistingReview = (pullRequest) => __awaiter(void 0, void 0, void 0, fun
         repo: pullRequest.repo,
         pull_number: pullRequest.number,
     });
-    core.debug(`got reviews: ${JSON.stringify(reviews)}`);
     return reviews.data.find((review) => {
         return review.user != null &&
             isGitHubActionUser(review.user.login) &&

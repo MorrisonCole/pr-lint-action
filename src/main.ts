@@ -79,6 +79,8 @@ async function dismissReview(pullRequest: {
       pull_number: pullRequest.number,
     });
 
+      core.debug(`got reviews: ${JSON.stringify(comments)}`);
+
     var existingComment = comments.data.find(
       (_: { id: number; user: { login: string } | null }) => {
         return review.user != null && isGitHubActionUser(review.user.login);
@@ -120,8 +122,6 @@ const getExistingReview = async (pullRequest: {
     repo: pullRequest.repo,
     pull_number: pullRequest.number,
   });
-
-  core.debug(`got reviews: ${JSON.stringify(reviews)}`);
 
   return reviews.data.find(
     (review: { user: { login: string } | null; state: string }) => {
