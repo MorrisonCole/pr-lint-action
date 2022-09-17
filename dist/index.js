@@ -136,7 +136,7 @@ const getExistingReview = (pullRequest) => __awaiter(void 0, void 0, void 0, fun
         repo: pullRequest.repo,
         pull_number: pullRequest.number,
     });
-    core.debug(`got reviews: ${reviews}`);
+    core.debug(`got reviews: ${reviews.toString()}`);
     return reviews.data.find((review) => {
         review.user != null &&
             isGitHubActionUser(review.user.login) &&
