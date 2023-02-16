@@ -3,6 +3,8 @@
 :octocat: A fast 🔥 TypeScript GitHub Action to ensure that your PR title
 matches a given regex.
 
+Repo forked from MorrisonCole/pr-lint-action.
+
 Supports the following feedback mechanisms 🛠:
 
 - 🤖 Review, request/dismiss changes, and comment with bot
