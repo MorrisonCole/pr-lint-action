@@ -30,7 +30,14 @@ jobs:
     steps:
       - uses: morrisoncole/pr-lint-action@v1.7.0
         with:
-          # Note: if you have branch protection rules enabled, the `GITHUB_TOKEN` permissions won't cover dismissing reviews. Your options are to pass in a custom token (perhaps by creating some sort of 'service' user and creating a personal access token with the correct permissions) or to turn off `on-failed-regex-request-changes` and use action failure to prevent merges instead (with `on-failed-regex-fail-action: true`). See: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token & https://docs.github.com/en/rest/pulls/reviews#dismiss-a-review-for-a-pull-request
+          # Note: if you have branch protection rules enabled, the `GITHUB_TOKEN` permissions
+          # won't cover dismissing reviews. Your options are to pass in a custom token
+          # (perhaps by creating some sort of 'service' user and creating a personal access
+          # token with the correct permissions) or to turn off `on-failed-regex-request-changes`
+          # and use action failure to prevent merges instead (with
+          # `on-failed-regex-fail-action: true`). See:
+          # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
+          # https://docs.github.com/en/rest/pulls/reviews#dismiss-a-review-for-a-pull-request
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           title-regex: "#[eE][xX]-[0-9]+"
           on-failed-regex-fail-action: false
