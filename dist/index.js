@@ -7,7 +7,7 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.hasReviewedState = void 0;
+exports.hasReviewedState = exports.run = void 0;
 const core_1 = __nccwpck_require__(2186);
 const github_1 = __nccwpck_require__(5438);
 const GITHUB_ACTIONS_LOGIN = "github-actions[bot]";
@@ -43,6 +43,7 @@ async function run() {
         }
     }
 }
+exports.run = run;
 const createOrUpdateReview = async (comment, pullRequest) => {
     const review = await getExistingReview(pullRequest);
     if (review === undefined) {
@@ -112,9 +113,6 @@ const hasReviewedState = (state) => {
     return state === "CHANGES_REQUESTED" || state === "COMMENTED";
 };
 exports.hasReviewedState = hasReviewedState;
-run().catch((error) => {
-    (0, core_1.setFailed)(error);
-});
 
 
 /***/ }),
@@ -14752,13 +14750,24 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(3109);
-/******/ 	module.exports = __webpack_exports__;
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+var exports = __webpack_exports__;
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const main_1 = __nccwpck_require__(3109);
+const core_1 = __nccwpck_require__(2186);
+(0, main_1.run)().catch((error) => {
+    if (error instanceof Error) {
+        (0, core_1.setFailed)(error);
+    }
+});
+
+})();
+
+module.exports = __webpack_exports__;
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

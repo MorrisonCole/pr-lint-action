@@ -22,7 +22,7 @@ const onSucceededRegexDismissReviewComment: string = getInput(
 
 const octokit = getOctokit(repoToken);
 
-async function run(): Promise<void> {
+export async function run(): Promise<void> {
   const githubContext = context;
   const pullRequest = githubContext.issue;
 
@@ -139,7 +139,3 @@ const isGitHubActionUser = (login: string) => {
 export const hasReviewedState = (state: string) => {
   return state === "CHANGES_REQUESTED" || state === "COMMENTED";
 };
-
-run().catch((error) => {
-  setFailed(error);
-});
