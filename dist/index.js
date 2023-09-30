@@ -2,86 +2,51 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 3109:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.hasReviewedState = void 0;
-const core = __importStar(__nccwpck_require__(2186));
-const github = __importStar(__nccwpck_require__(5438));
+const core_1 = __nccwpck_require__(2186);
+const github_1 = __nccwpck_require__(5438);
 const GITHUB_ACTIONS_LOGIN = "github-actions[bot]";
-const repoToken = core.getInput("repo-token", { required: true });
-const titleRegex = new RegExp(core.getInput("title-regex", {
+const repoToken = (0, core_1.getInput)("repo-token", { required: true });
+const titleRegex = new RegExp((0, core_1.getInput)("title-regex", {
     required: true,
 }));
-const onFailedRegexFailAction = core.getInput("on-failed-regex-fail-action") === "true";
-const onFailedRegexCreateReview = core.getInput("on-failed-regex-create-review") === "true";
-const onFailedRegexRequestChanges = core.getInput("on-failed-regex-request-changes") === "true";
-const onFailedRegexComment = core.getInput("on-failed-regex-comment");
-const onSucceededRegexDismissReviewComment = core.getInput("on-succeeded-regex-dismiss-review-comment");
-const octokit = github.getOctokit(repoToken);
-function run() {
-    var _a, _b;
-    return __awaiter(this, void 0, void 0, function* () {
-        const githubContext = github.context;
-        const pullRequest = githubContext.issue;
-        const title = (_b = (_a = githubContext.payload.pull_request) === null || _a === void 0 ? void 0 : _a.title) !== null && _b !== void 0 ? _b : "";
-        const comment = onFailedRegexComment.replace("%regex%", titleRegex.source);
-        core.debug(`Title Regex: ${titleRegex.source}`);
-        core.debug(`Title: ${title}`);
-        const titleMatchesRegex = titleRegex.test(title);
-        if (!titleMatchesRegex) {
-            if (onFailedRegexCreateReview) {
-                yield createOrUpdateReview(comment, pullRequest);
-            }
-            if (onFailedRegexFailAction) {
-                core.setFailed(comment);
-            }
+const onFailedRegexFailAction = (0, core_1.getInput)("on-failed-regex-fail-action") === "true";
+const onFailedRegexCreateReview = (0, core_1.getInput)("on-failed-regex-create-review") === "true";
+const onFailedRegexRequestChanges = (0, core_1.getInput)("on-failed-regex-request-changes") === "true";
+const onFailedRegexComment = (0, core_1.getInput)("on-failed-regex-comment");
+const onSucceededRegexDismissReviewComment = (0, core_1.getInput)("on-succeeded-regex-dismiss-review-comment");
+const octokit = (0, github_1.getOctokit)(repoToken);
+async function run() {
+    const githubContext = github_1.context;
+    const pullRequest = githubContext.issue;
+    const title = githubContext.payload.pull_request?.title ?? "";
+    const comment = onFailedRegexComment.replace("%regex%", titleRegex.source);
+    (0, core_1.debug)(`Title Regex: ${titleRegex.source}`);
+    (0, core_1.debug)(`Title: ${title}`);
+    const titleMatchesRegex = titleRegex.test(title);
+    if (!titleMatchesRegex) {
+        if (onFailedRegexCreateReview) {
+            await createOrUpdateReview(comment, pullRequest);
         }
-        else {
-            if (onFailedRegexCreateReview) {
-                yield dismissReview(pullRequest);
-            }
+        if (onFailedRegexFailAction) {
+            (0, core_1.setFailed)(comment);
         }
-    });
+    }
+    else {
+        if (onFailedRegexCreateReview) {
+            await dismissReview(pullRequest);
+        }
+    }
 }
-const createOrUpdateReview = (comment, pullRequest) => __awaiter(void 0, void 0, void 0, function* () {
-    const review = yield getExistingReview(pullRequest);
+const createOrUpdateReview = async (comment, pullRequest) => {
+    const review = await getExistingReview(pullRequest);
     if (review === undefined) {
-        yield octokit.rest.pulls.createReview({
+        await octokit.rest.pulls.createReview({
             owner: pullRequest.owner,
             repo: pullRequest.repo,
             pull_number: pullRequest.number,
@@ -90,7 +55,7 @@ const createOrUpdateReview = (comment, pullRequest) => __awaiter(void 0, void 0,
         });
     }
     else {
-        yield octokit.rest.pulls.updateReview({
+        await octokit.rest.pulls.updateReview({
             owner: pullRequest.owner,
             repo: pullRequest.repo,
             pull_number: pullRequest.number,
@@ -98,38 +63,38 @@ const createOrUpdateReview = (comment, pullRequest) => __awaiter(void 0, void 0,
             body: comment,
         });
     }
-});
-const dismissReview = (pullRequest) => __awaiter(void 0, void 0, void 0, function* () {
-    core.debug(`Trying to get existing review`);
-    const review = yield getExistingReview(pullRequest);
+};
+const dismissReview = async (pullRequest) => {
+    (0, core_1.debug)(`Trying to get existing review`);
+    const review = await getExistingReview(pullRequest);
     if (review === undefined) {
-        core.debug("Found no existing review");
+        (0, core_1.debug)("Found no existing review");
         return;
     }
     if (review.state === "COMMENTED") {
-        yield octokit.rest.pulls.updateReview({
+        await octokit.rest.pulls.updateReview({
             owner: pullRequest.owner,
             repo: pullRequest.repo,
             pull_number: pullRequest.number,
             review_id: review.id,
             body: onSucceededRegexDismissReviewComment,
         });
-        core.debug(`Updated existing review`);
+        (0, core_1.debug)(`Updated existing review`);
     }
     else {
-        yield octokit.rest.pulls.dismissReview({
+        await octokit.rest.pulls.dismissReview({
             owner: pullRequest.owner,
             repo: pullRequest.repo,
             pull_number: pullRequest.number,
             review_id: review.id,
             message: onSucceededRegexDismissReviewComment,
         });
-        core.debug(`Dismissed existing review`);
+        (0, core_1.debug)(`Dismissed existing review`);
     }
-});
-const getExistingReview = (pullRequest) => __awaiter(void 0, void 0, void 0, function* () {
-    core.debug(`getting reviews`);
-    const reviews = yield octokit.rest.pulls.listReviews({
+};
+const getExistingReview = async (pullRequest) => {
+    (0, core_1.debug)(`getting reviews`);
+    const reviews = await octokit.rest.pulls.listReviews({
         owner: pullRequest.owner,
         repo: pullRequest.repo,
         pull_number: pullRequest.number,
@@ -139,7 +104,7 @@ const getExistingReview = (pullRequest) => __awaiter(void 0, void 0, void 0, fun
             isGitHubActionUser(review.user.login) &&
             (0, exports.hasReviewedState)(review.state));
     });
-});
+};
 const isGitHubActionUser = (login) => {
     return login === GITHUB_ACTIONS_LOGIN;
 };
@@ -148,7 +113,7 @@ const hasReviewedState = (state) => {
 };
 exports.hasReviewedState = hasReviewedState;
 run().catch((error) => {
-    core.setFailed(error);
+    (0, core_1.setFailed)(error);
 });
 
 
@@ -293,7 +258,6 @@ const file_command_1 = __nccwpck_require__(717);
 const utils_1 = __nccwpck_require__(5278);
 const os = __importStar(__nccwpck_require__(2037));
 const path = __importStar(__nccwpck_require__(1017));
-const uuid_1 = __nccwpck_require__(5840);
 const oidc_utils_1 = __nccwpck_require__(8041);
 /**
  * The code to exit an action
@@ -323,20 +287,9 @@ function exportVariable(name, val) {
     process.env[name] = convertedVal;
     const filePath = process.env['GITHUB_ENV'] || '';
     if (filePath) {
-        const delimiter = `ghadelimiter_${uuid_1.v4()}`;
-        // These should realistically never happen, but just in case someone finds a way to exploit uuid generation let's not allow keys or values that contain the delimiter.
-        if (name.includes(delimiter)) {
-            throw new Error(`Unexpected input: name should not contain the delimiter "${delimiter}"`);
-        }
-        if (convertedVal.includes(delimiter)) {
-            throw new Error(`Unexpected input: value should not contain the delimiter "${delimiter}"`);
-        }
-        const commandValue = `${name}<<${delimiter}${os.EOL}${convertedVal}${os.EOL}${delimiter}`;
-        file_command_1.issueCommand('ENV', commandValue);
+        return file_command_1.issueFileCommand('ENV', file_command_1.prepareKeyValueMessage(name, val));
     }
-    else {
-        command_1.issueCommand('set-env', { name }, convertedVal);
-    }
+    command_1.issueCommand('set-env', { name }, convertedVal);
 }
 exports.exportVariable = exportVariable;
 /**
@@ -354,7 +307,7 @@ exports.setSecret = setSecret;
 function addPath(inputPath) {
     const filePath = process.env['GITHUB_PATH'] || '';
     if (filePath) {
-        file_command_1.issueCommand('PATH', inputPath);
+        file_command_1.issueFileCommand('PATH', inputPath);
     }
     else {
         command_1.issueCommand('add-path', {}, inputPath);
@@ -394,7 +347,10 @@ function getMultilineInput(name, options) {
     const inputs = getInput(name, options)
         .split('\n')
         .filter(x => x !== '');
-    return inputs;
+    if (options && options.trimWhitespace === false) {
+        return inputs;
+    }
+    return inputs.map(input => input.trim());
 }
 exports.getMultilineInput = getMultilineInput;
 /**
@@ -427,8 +383,12 @@ exports.getBooleanInput = getBooleanInput;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
+    const filePath = process.env['GITHUB_OUTPUT'] || '';
+    if (filePath) {
+        return file_command_1.issueFileCommand('OUTPUT', file_command_1.prepareKeyValueMessage(name, value));
+    }
     process.stdout.write(os.EOL);
-    command_1.issueCommand('set-output', { name }, value);
+    command_1.issueCommand('set-output', { name }, utils_1.toCommandValue(value));
 }
 exports.setOutput = setOutput;
 /**
@@ -557,7 +517,11 @@ exports.group = group;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function saveState(name, value) {
-    command_1.issueCommand('save-state', { name }, value);
+    const filePath = process.env['GITHUB_STATE'] || '';
+    if (filePath) {
+        return file_command_1.issueFileCommand('STATE', file_command_1.prepareKeyValueMessage(name, value));
+    }
+    command_1.issueCommand('save-state', { name }, utils_1.toCommandValue(value));
 }
 exports.saveState = saveState;
 /**
@@ -623,13 +587,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.issueCommand = void 0;
+exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(7147));
 const os = __importStar(__nccwpck_require__(2037));
+const uuid_1 = __nccwpck_require__(5840);
 const utils_1 = __nccwpck_require__(5278);
-function issueCommand(command, message) {
+function issueFileCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
         throw new Error(`Unable to find environment variable for file command ${command}`);
@@ -641,7 +606,22 @@ function issueCommand(command, message) {
         encoding: 'utf8'
     });
 }
-exports.issueCommand = issueCommand;
+exports.issueFileCommand = issueFileCommand;
+function prepareKeyValueMessage(key, value) {
+    const delimiter = `ghadelimiter_${uuid_1.v4()}`;
+    const convertedValue = utils_1.toCommandValue(value);
+    // These should realistically never happen, but just in case someone finds a
+    // way to exploit uuid generation let's not allow keys or values that contain
+    // the delimiter.
+    if (key.includes(delimiter)) {
+        throw new Error(`Unexpected input: name should not contain the delimiter "${delimiter}"`);
+    }
+    if (convertedValue.includes(delimiter)) {
+        throw new Error(`Unexpected input: value should not contain the delimiter "${delimiter}"`);
+    }
+    return `${key}<<${delimiter}${os.EOL}${convertedValue}${os.EOL}${delimiter}`;
+}
+exports.prepareKeyValueMessage = prepareKeyValueMessage;
 //# sourceMappingURL=file-command.js.map
 
 /***/ }),
@@ -696,7 +676,7 @@ class OidcClient {
                 .catch(error => {
                 throw new Error(`Failed to get ID Token. \n 
         Error Code : ${error.statusCode}\n 
-        Error Message: ${error.result.message}`);
+        Error Message: ${error.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
             if (!id_token) {
@@ -1228,8 +1208,9 @@ exports.context = new Context.Context();
  * @param     token    the repo PAT or GITHUB_TOKEN
  * @param     options  other options to set
  */
-function getOctokit(token, options) {
-    return new utils_1.GitHub(utils_1.getOctokitOptions(token, options));
+function getOctokit(token, options, ...additionalPlugins) {
+    const GitHubWithPlugins = utils_1.GitHub.plugin(...additionalPlugins);
+    return new GitHubWithPlugins(utils_1.getOctokitOptions(token, options));
 }
 exports.getOctokit = getOctokit;
 //# sourceMappingURL=github.js.map
@@ -1311,7 +1292,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getOctokitOptions = exports.GitHub = exports.context = void 0;
+exports.getOctokitOptions = exports.GitHub = exports.defaults = exports.context = void 0;
 const Context = __importStar(__nccwpck_require__(4087));
 const Utils = __importStar(__nccwpck_require__(7914));
 // octokit + plugins
@@ -1320,13 +1301,13 @@ const plugin_rest_endpoint_methods_1 = __nccwpck_require__(3044);
 const plugin_paginate_rest_1 = __nccwpck_require__(4193);
 exports.context = new Context.Context();
 const baseUrl = Utils.getApiBaseUrl();
-const defaults = {
+exports.defaults = {
     baseUrl,
     request: {
         agent: Utils.getProxyAgent(baseUrl)
     }
 };
-exports.GitHub = core_1.Octokit.plugin(plugin_rest_endpoint_methods_1.restEndpointMethods, plugin_paginate_rest_1.paginateRest).defaults(defaults);
+exports.GitHub = core_1.Octokit.plugin(plugin_rest_endpoint_methods_1.restEndpointMethods, plugin_paginate_rest_1.paginateRest).defaults(exports.defaults);
 /**
  * Convience function to correctly format Octokit Options to pass into the constructor.
  *
