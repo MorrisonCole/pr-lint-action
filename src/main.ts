@@ -1,37 +1,37 @@
-import * as core from "@actions/core";
-import * as github from "@actions/github";
+import { getInput, debug, setFailed } from "@actions/core";
+import { getOctokit, context } from "@actions/github";
 
 const GITHUB_ACTIONS_LOGIN = "github-actions[bot]";
 
-const repoToken = core.getInput("repo-token", { required: true });
+const repoToken = getInput("repo-token", { required: true });
 const titleRegex: RegExp = new RegExp(
-  core.getInput("title-regex", {
+  getInput("title-regex", {
     required: true,
-  })
+  }),
 );
 const onFailedRegexFailAction: boolean =
-  core.getInput("on-failed-regex-fail-action") === "true";
+  getInput("on-failed-regex-fail-action") === "true";
 const onFailedRegexCreateReview: boolean =
-  core.getInput("on-failed-regex-create-review") === "true";
+  getInput("on-failed-regex-create-review") === "true";
 const onFailedRegexRequestChanges: boolean =
-  core.getInput("on-failed-regex-request-changes") === "true";
-const onFailedRegexComment: string = core.getInput("on-failed-regex-comment");
-const onSucceededRegexDismissReviewComment: string = core.getInput(
-  "on-succeeded-regex-dismiss-review-comment"
+  getInput("on-failed-regex-request-changes") === "true";
+const onFailedRegexComment: string = getInput("on-failed-regex-comment");
+const onSucceededRegexDismissReviewComment: string = getInput(
+  "on-succeeded-regex-dismiss-review-comment",
 );
 
-const octokit = github.getOctokit(repoToken);
+const octokit = getOctokit(repoToken);
 
-async function run(): Promise<void> {
-  const githubContext = github.context;
+export async function run(): Promise<void> {
+  const githubContext = context;
   const pullRequest = githubContext.issue;
 
   const title: string =
     (githubContext.payload.pull_request?.title as string) ?? "";
   const comment = onFailedRegexComment.replace("%regex%", titleRegex.source);
 
-  core.debug(`Title Regex: ${titleRegex.source}`);
-  core.debug(`Title: ${title}`);
+  debug(`Title Regex: ${titleRegex.source}`);
+  debug(`Title: ${title}`);
 
   const titleMatchesRegex: boolean = titleRegex.test(title);
   if (!titleMatchesRegex) {
@@ -39,7 +39,7 @@ async function run(): Promise<void> {
       await createOrUpdateReview(comment, pullRequest);
     }
     if (onFailedRegexFailAction) {
-      core.setFailed(comment);
+      setFailed(comment);
     }
   } else {
     if (onFailedRegexCreateReview) {
@@ -50,7 +50,7 @@ async function run(): Promise<void> {
 
 const createOrUpdateReview = async (
   comment: string,
-  pullRequest: { owner: string; repo: string; number: number }
+  pullRequest: { owner: string; repo: string; number: number },
 ) => {
   const review = await getExistingReview(pullRequest);
 
@@ -78,11 +78,11 @@ const dismissReview = async (pullRequest: {
   repo: string;
   number: number;
 }) => {
-  core.debug(`Trying to get existing review`);
+  debug(`Trying to get existing review`);
   const review = await getExistingReview(pullRequest);
 
   if (review === undefined) {
-    core.debug("Found no existing review");
+    debug("Found no existing review");
     return;
   }
 
@@ -95,7 +95,7 @@ const dismissReview = async (pullRequest: {
       body: onSucceededRegexDismissReviewComment,
     });
 
-    core.debug(`Updated existing review`);
+    debug(`Updated existing review`);
   } else {
     await octokit.rest.pulls.dismissReview({
       owner: pullRequest.owner,
@@ -104,7 +104,7 @@ const dismissReview = async (pullRequest: {
       review_id: review.id,
       message: onSucceededRegexDismissReviewComment,
     });
-    core.debug(`Dismissed existing review`);
+    debug(`Dismissed existing review`);
   }
 };
 
@@ -113,7 +113,7 @@ const getExistingReview = async (pullRequest: {
   repo: string;
   number: number;
 }) => {
-  core.debug(`getting reviews`);
+  debug(`getting reviews`);
   const reviews = await octokit.rest.pulls.listReviews({
     owner: pullRequest.owner,
     repo: pullRequest.repo,
@@ -127,7 +127,7 @@ const getExistingReview = async (pullRequest: {
         isGitHubActionUser(review.user.login) &&
         hasReviewedState(review.state)
       );
-    }
+    },
   );
 };
 
@@ -139,7 +139,3 @@ const isGitHubActionUser = (login: string) => {
 export const hasReviewedState = (state: string) => {
   return state === "CHANGES_REQUESTED" || state === "COMMENTED";
 };
-
-run().catch((error) => {
-  core.setFailed(error);
-});
