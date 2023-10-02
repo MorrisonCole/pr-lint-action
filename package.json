@@ -32,7 +32,7 @@
     "@actions/github": "5.1.1"
   },
   "devDependencies": {
-    "@types/node": "18.18.1",
+    "@types/node": "18.18.3",
     "@typescript-eslint/eslint-plugin": "6.7.4",
     "@typescript-eslint/parser": "6.7.4",
     "@vercel/ncc": "0.38.0",
