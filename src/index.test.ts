@@ -21,7 +21,7 @@ describe("index", () => {
       setFailed: jest.fn(),
     }));
 
-    const mockError: Error = new Error("An error occurred");
+    const mockError = new Error("An error occurred");
     jest.doMock("./main", () => ({
       run: jest.fn(() => Promise.reject(mockError)),
     }));
