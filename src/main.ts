@@ -113,7 +113,7 @@ const getExistingReview = async (pullRequest: {
   repo: string;
   number: number;
 }) => {
-  debug(`getting reviews`);
+  debug(`Getting reviews`);
   const reviews = await octokit.rest.pulls.listReviews({
     owner: pullRequest.owner,
     repo: pullRequest.repo,
