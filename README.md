@@ -28,7 +28,7 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: morrisoncole/pr-lint-action@v1.7.0
+      - uses: morrisoncole/pr-lint-action@v1.7.1
         with:
           # Note: if you have branch protection rules enabled, the `GITHUB_TOKEN` permissions
           # won't cover dismissing reviews. Your options are to pass in a custom token
@@ -62,6 +62,10 @@ jobs:
 | `on-succeeded-regex-dismiss-review-comment` | no        | string | "All good!"                        | The message to post as a comment when the regex succeeds after previously failing.                                                                            |
 
 ## Changelog
+
+### v1.7.1
+
+- Upgrade Node from 16 -> 20 ([thanks @sirLisko](https://github.com/MorrisonCole/pr-lint-action/pull/735)! 🙏).
 
 ### v1.7.0
 
