@@ -185,12 +185,16 @@ being.
 
 ### Build & Package
 
-`yarn install`
+`yarn`
 
 `yarn build`
 
 `yarn package`: We package everything to a single file with Vercel's
 [ncc](https://github.com/vercel/ncc). Outputs to `dist/index.js`.
+
+### Testing the Action
+
+You can test the action by creating a PR with a `example/*` branch.
 
 ### Validate Renovate Config
 
