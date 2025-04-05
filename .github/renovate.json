@@ -1,13 +1,11 @@
 {
-  "extends": ["config:base"],
-  "commitMessageSuffix": "#EX-123",
-  "prConcurrentLimit": 1,
-  "prHourlyLimit": 0,
-  "packageRules": [
-    {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
-    }
+  "extends": [
+    "config:recommended",
+    ":automergeAll",
+    ":maintainLockFilesWeekly",
+    "helpers:pinGitHubActionDigests"
   ],
-  "labels": ["automerge", "dependencies"]
+  "labels": [
+    "dependencies"
+  ]
 }
