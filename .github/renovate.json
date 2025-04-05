@@ -5,7 +5,6 @@
     ":maintainLockFilesWeekly",
     "helpers:pinGitHubActionDigests"
   ],
-  "commitMessageSuffix": "#EX-123",
   "labels": [
     "dependencies"
   ]
