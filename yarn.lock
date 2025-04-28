@@ -1168,16 +1168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
-  version: 22.14.1
-  resolution: "@types/node@npm:22.14.1"
-  dependencies:
-    undici-types: "npm:~6.21.0"
-  checksum: 10c0/d49c4d00403b1c2348cf0701b505fd636d80aabe18102105998dc62fdd36dcaf911e73c7a868c48c21c1022b825c67b475b65b1222d84b704d8244d152bb7f86
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:22.15.2":
+"@types/node@npm:*, @types/node@npm:22.15.2":
   version: 22.15.2
   resolution: "@types/node@npm:22.15.2"
   dependencies:
@@ -1862,9 +1853,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.73":
-  version: 1.5.139
-  resolution: "electron-to-chromium@npm:1.5.139"
-  checksum: 10c0/1b468c0c02a38322261b50b12ed090ff792a0d2ea24f299368babd484d5b81829528540463158572a3524fd835014d877d6c4bf097509bdb13ca696609b04aca
+  version: 1.5.143
+  resolution: "electron-to-chromium@npm:1.5.143"
+  checksum: 10c0/2868655af1b32784395475b1f58d6363c837b198f64cb23e0fbcf1a45f682187cbf2b2aea1df6e4584a4d1a7c7c4ced04a9a09c24644ae0b216af6bdc1501cf5
   languageName: node
   linkType: hard
 
@@ -4325,9 +4316,9 @@ __metadata:
   linkType: hard
 
 "type-fest@npm:^4.39.1":
-  version: 4.40.0
-  resolution: "type-fest@npm:4.40.0"
-  checksum: 10c0/b39d4da6f9a154e3db7e714cd05ccf56b53f4f0bbf74dd294cb6be4921b16ecca5cb00cb81b53ab621a31c8e8509c74b5101895ada47af9de368a317d24538a3
+  version: 4.40.1
+  resolution: "type-fest@npm:4.40.1"
+  checksum: 10c0/590cb7d4dcd3da83efe49b5b52cd041661f6fa29f18cb76650fe1fdeb4090688e92955656e9d981e606abb13d25c0418be8c6c6504d80e87fe18dc9ca0888392
   languageName: node
   linkType: hard
 
