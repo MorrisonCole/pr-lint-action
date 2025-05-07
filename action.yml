@@ -26,8 +26,7 @@ inputs:
     required: false
     default: false
   on-failed-regex-request-changes:
-    description:
-      "Whether the action should request changes or just provide a comment."
+    description: "Whether the action should request changes or just provide a comment."
     required: false
     default: true
   on-succeeded-regex-dismiss-review-comment:
@@ -36,9 +35,16 @@ inputs:
       review dismissed."
     required: false
     default: "All good!"
+  on-succeeded-regex-minimize-comment:
+    description: "Whether to minimize (hide) comments when the PR title passes regex validation."
+    required: false
+    default: true
+  on-minimize-comment-reason:
+    description: "The reason for minimizing a comment when the PR title passes regex validation. (One of 'abuse', 'off-topic', 'outdated', 'resolved', 'duplicate' and 'spam'."
+    required: false
+    default: "resolved"
   repo-token:
-    description:
-      "Github token with access to the repository (secrets.GITHUB_TOKEN)."
+    description: "Github token with access to the repository (secrets.GITHUB_TOKEN)."
     required: true
 runs:
   using: "node20"
