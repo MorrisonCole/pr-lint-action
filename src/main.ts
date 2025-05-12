@@ -19,6 +19,9 @@ const onFailedRegexComment: string = getInput("on-failed-regex-comment");
 const onSucceededRegexDismissReviewComment: string = getInput(
   "on-succeeded-regex-dismiss-review-comment",
 );
+const onSucceededRegexMinimizeComment: boolean =
+  getInput("on-succeeded-regex-minimize-comment") === "true";
+const onMinimizeCommentReason: string = getInput("on-minimize-comment-reason") || "RESOLVED";
 
 const octokit = getOctokit(repoToken);
 
@@ -43,6 +46,8 @@ export async function run(): Promise<void> {
     }
   } else {
     if (onFailedRegexCreateReview) {
+      // Title is now valid, dismiss any existing review
+      console.log(`PR title matches regex, dismissing any existing reviews`);
       await dismissReview(pullRequest);
       if (onSucceededRegexMinimizeComment) {
         await minimizeReview(pullRequest);
