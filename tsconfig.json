@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2022",
+    "target": "es2024",
     "module": "nodenext",
-    "outDir": "./lib",
-    "rootDir": "./src",
-    "strict": true,
+    
+    "outDir": "./out",
+    "noEmit": true,
+
+    "incremental": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
     "allowJs": false,

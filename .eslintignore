@@ -1,4 +1,4 @@
 dist/
-lib/
+out/
 node_modules/
 .eslintrc.js
