@@ -2,10 +2,10 @@
   "compilerOptions": {
     "target": "es2024",
     "module": "nodenext",
+    "moduleResolution": "nodenext",
     
-    "outDir": "./out",
+    "allowSyntheticDefaultImports": true,
     "noEmit": true,
-
     "incremental": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
@@ -16,5 +16,5 @@
     "noUnusedParameters": true,
     "removeComments": true
   },
-  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+  "exclude": ["node_modules", "dist"]
 }
