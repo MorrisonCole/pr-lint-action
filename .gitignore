@@ -10,3 +10,9 @@
 !.yarn/versions
 .pnp.*
 node_modules
+
+# TypeScript
+tsconfig.tsbuildinfo
+
+# Rollup
+.rollup.cache

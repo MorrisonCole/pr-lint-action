@@ -7,7 +7,6 @@ on:
     #
     # Possible values: https://help.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-event-pull_request
     types: [opened, edited, reopened, synchronize]
-    branches: ['example/**']
 
 jobs:
   pr-lint:

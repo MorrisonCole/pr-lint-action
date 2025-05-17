@@ -1,4 +1,4 @@
-import { run } from "./main";
+import { run } from "./main.js";
 import { setFailed } from "@actions/core";
 
 run().catch((error) => {

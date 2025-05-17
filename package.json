@@ -2,10 +2,10 @@
   "name": "pr-lint-action",
   "version": "1.7.1",
   "description": "A GitHub Action to ensure that your PR title matches a given regex.",
-  "main": "lib/index.js",
+  "main": "dist/index.mjs",
   "scripts": {
     "build": "tsc",
-    "package": "ncc build --source-map --license licenses.txt",
+    "package": "rollup --config rollup.config.ts",
     "lint:eslint": "eslint . --ext .ts",
     "lint:prettier": "prettier \"**/*.{ts,md,json,yml}\" --write",
     "test": "jest"
@@ -32,16 +32,25 @@
     "@actions/github": "6.0.1"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "28.0.3",
+    "@rollup/plugin-node-resolve": "16.0.1",
+    "@rollup/plugin-terser": "0.4.4",
+    "@rollup/plugin-typescript": "12.1.2",
     "@types/node": "22.15.18",
     "@typescript-eslint/eslint-plugin": "8.32.1",
     "@typescript-eslint/parser": "8.32.1",
-    "@vercel/ncc": "0.38.3",
     "eslint": "9.27.0",
     "eslint-config-prettier": "10.1.5",
     "jest": "29.7.0",
     "prettier": "3.5.3",
+    "rollup": "4.40.2",
     "ts-jest": "29.3.4",
+    "tslib": "2.8.1",
     "typescript": "5.8.3"
   },
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module",
   "packageManager": "yarn@4.9.1"
 }

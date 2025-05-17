@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2022",
+    "target": "es2024",
     "module": "nodenext",
-    "outDir": "./lib",
-    "rootDir": "./src",
-    "strict": true,
+    "moduleResolution": "nodenext",
+    
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "incremental": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
     "allowJs": false,
@@ -14,5 +16,5 @@
     "noUnusedParameters": true,
     "removeComments": true
   },
-  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+  "exclude": ["node_modules", "dist"]
 }

@@ -187,10 +187,9 @@ being.
 
 `yarn`
 
-`yarn build`
+`yarn build`: run typechecks
 
-`yarn package`: We package everything to a single file with Vercel's
-[ncc](https://github.com/vercel/ncc). Outputs to `dist/index.js`.
+`yarn package`: bundle into `dist/index.mjs` with [esbuild](https://esbuild.github.io/)
 
 ### Testing the Action
 
