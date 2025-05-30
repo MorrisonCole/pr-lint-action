@@ -1171,12 +1171,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:22.15.21":
+"@types/node@npm:*":
   version: 22.15.21
   resolution: "@types/node@npm:22.15.21"
   dependencies:
     undici-types: "npm:~6.21.0"
   checksum: 10c0/f092bbccda2131c2b2c8f720338080aa0ef1d928f5f1062c03954a4f7dafa7ee3ed29bc3e51bd4e2584473b3d943c637a2b39ad7174898970818270187cf10c1
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:22.15.27":
+  version: 22.15.27
+  resolution: "@types/node@npm:22.15.27"
+  dependencies:
+    undici-types: "npm:~6.21.0"
+  checksum: 10c0/1057dfabd9dc1a9c0de35b057341f0b22e4b54082d432cca6c30209e16bd67668cdb41a794ea753deaaf15f6d6fdc1e1cb2551afe21a78952e0b82386697b133
   languageName: node
   linkType: hard
 
@@ -3774,7 +3783,7 @@ __metadata:
   dependencies:
     "@actions/core": "npm:1.11.1"
     "@actions/github": "npm:6.0.1"
-    "@types/node": "npm:22.15.21"
+    "@types/node": "npm:22.15.27"
     "@typescript-eslint/eslint-plugin": "npm:8.32.1"
     "@typescript-eslint/parser": "npm:8.32.1"
     "@vercel/ncc": "npm:0.38.3"
