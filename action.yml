@@ -36,6 +36,14 @@ inputs:
       review dismissed."
     required: false
     default: "All good!"
+  on-succeeded-regex-minimize-comment:
+    description: "Whether to minimize (hide) comments when the PR title passes regex validation."
+    required: false
+    default: true
+  on-minimize-comment-reason:
+    description: "The reason for minimizing a comment when the PR title passes regex validation. (One of 'ABUSE', 'OFF_TOPIC', 'OUTDATED', 'RESOLVED', 'DUPLICATE' and 'SPAM'."
+    required: false
+    default: "RESOLVED"
   repo-token:
     description:
       "Github token with access to the repository (secrets.GITHUB_TOKEN)."
