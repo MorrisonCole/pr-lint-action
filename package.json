@@ -38,7 +38,7 @@
     "@vercel/ncc": "0.38.3",
     "eslint": "9.28.0",
     "eslint-config-prettier": "10.1.5",
-    "jest": "30.0.0",
+    "jest": "30.0.3",
     "prettier": "3.5.3",
     "ts-jest": "29.4.0",
     "typescript": "5.8.3"
