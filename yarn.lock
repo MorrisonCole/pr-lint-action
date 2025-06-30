@@ -913,13 +913,12 @@ __metadata:
   linkType: hard
 
 "@jridgewell/gen-mapping@npm:^0.3.5":
-  version: 0.3.8
-  resolution: "@jridgewell/gen-mapping@npm:0.3.8"
+  version: 0.3.9
+  resolution: "@jridgewell/gen-mapping@npm:0.3.9"
   dependencies:
-    "@jridgewell/set-array": "npm:^1.2.1"
-    "@jridgewell/sourcemap-codec": "npm:^1.4.10"
+    "@jridgewell/sourcemap-codec": "npm:^1.5.0"
     "@jridgewell/trace-mapping": "npm:^0.3.24"
-  checksum: 10c0/c668feaf86c501d7c804904a61c23c67447b2137b813b9ce03eca82cb9d65ac7006d766c218685d76e3d72828279b6ee26c347aa1119dab23fbaf36aed51585a
+  checksum: 10c0/94d89ac50bbeacf118b3b98ce300c068e4754d2dea9abc43340a80885c94160236e322722a89aa761257f1232a91ed2da77ee6d0636c29ea94a794d2d9f9243e
   languageName: node
   linkType: hard
 
@@ -930,27 +929,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/set-array@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@jridgewell/set-array@npm:1.2.1"
-  checksum: 10c0/2a5aa7b4b5c3464c895c802d8ae3f3d2b92fcbe84ad12f8d0bfbb1f5ad006717e7577ee1fd2eac00c088abe486c7adb27976f45d2941ff6b0b92b2c3302c60f4
-  languageName: node
-  linkType: hard
-
-"@jridgewell/sourcemap-codec@npm:^1.4.10, @jridgewell/sourcemap-codec@npm:^1.4.14":
-  version: 1.5.0
-  resolution: "@jridgewell/sourcemap-codec@npm:1.5.0"
-  checksum: 10c0/2eb864f276eb1096c3c11da3e9bb518f6d9fc0023c78344cdc037abadc725172c70314bdb360f2d4b7bffec7f5d657ce006816bc5d4ecb35e61b66132db00c18
+"@jridgewell/sourcemap-codec@npm:^1.4.14, @jridgewell/sourcemap-codec@npm:^1.5.0":
+  version: 1.5.1
+  resolution: "@jridgewell/sourcemap-codec@npm:1.5.1"
+  checksum: 10c0/e06b12ef3d58e988635511199da1e4f4870ea6561727b1265f3cd0e91e4b1d0efbfa12670bc83e00412da132b69ce943f292f1295246c099763646ba549cd957
   languageName: node
   linkType: hard
 
 "@jridgewell/trace-mapping@npm:^0.3.12, @jridgewell/trace-mapping@npm:^0.3.23, @jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.25":
-  version: 0.3.25
-  resolution: "@jridgewell/trace-mapping@npm:0.3.25"
+  version: 0.3.26
+  resolution: "@jridgewell/trace-mapping@npm:0.3.26"
   dependencies:
     "@jridgewell/resolve-uri": "npm:^3.1.0"
     "@jridgewell/sourcemap-codec": "npm:^1.4.14"
-  checksum: 10c0/3d1ce6ebc69df9682a5a8896b414c6537e428a1d68b02fcc8363b04284a8ca0df04d0ee3013132252ab14f2527bc13bea6526a912ecb5658f0e39fd2860b4df4
+  checksum: 10c0/06cfa517ce67c40812281bcafb205adbe509e3c4a178dc733dc04542ed166e6ffbcaf7784888d6152969fed80845b8d5e17daa7b5047f6d44980edf33fb0f4da
   languageName: node
   linkType: hard
 
@@ -1263,11 +1255,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 24.0.4
-  resolution: "@types/node@npm:24.0.4"
+  version: 24.0.7
+  resolution: "@types/node@npm:24.0.7"
   dependencies:
     undici-types: "npm:~7.8.0"
-  checksum: 10c0/590e8cb0ec59fb9cd566402120e690d87ecbdf57f1ee2b8493266121ed33aa4b25949a0c6156b84a6ffb9250baaf1f80e9af142da542ed603e6ee73fc4d1115f
+  checksum: 10c0/be3849816dafc54ec79e6be6dafcf60bdb6466beaf0081b941142d260e2b2864855210dfe5b4395c59b276468528695aefcf4f060ac95cc433b2968e80a311f9
   languageName: node
   linkType: hard
 
@@ -2113,9 +2105,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.173":
-  version: 1.5.176
-  resolution: "electron-to-chromium@npm:1.5.176"
-  checksum: 10c0/ab591218086d6f73d2f773756f7d277a1d176a6b83d6499864d2bc305b1ea1c7673c30f8541d0c55d40fb7f2595fe4041e72aa07351275ba04862b9bc507cc66
+  version: 1.5.177
+  resolution: "electron-to-chromium@npm:1.5.177"
+  checksum: 10c0/cf833a5ef576690e2c04a79dfbd9d73d85ae7215b6d3bd66d858e47940ddda567091688ddee0683454c89733c9acc7a4fb4dcbb2caa8c317639d9eb35074ab06
   languageName: node
   linkType: hard
 
@@ -3721,11 +3713,11 @@ __metadata:
   linkType: hard
 
 "napi-postinstall@npm:^0.2.4":
-  version: 0.2.4
-  resolution: "napi-postinstall@npm:0.2.4"
+  version: 0.2.5
+  resolution: "napi-postinstall@npm:0.2.5"
   bin:
     napi-postinstall: lib/cli.js
-  checksum: 10c0/e8c357d7e27848c4af7becf2796afff245a2fc8ba176e1b133410bb1c9934a66d4bc542d0c9f04c73b0ba34ee0486b30b6cd1c62ed3aa36797d394200c9a2a8b
+  checksum: 10c0/c4a1a8ca61aece10a6a7b46b834d7689321c4bb164710df9d896a273f24544084c5be95b47c55208036a06ae5bfa0afabb6a8886985d4438543ee07344b9c90c
   languageName: node
   linkType: hard
 
