@@ -9,23 +9,48 @@ inputs:
     description: "Regex to ensure PR title matches. Allows anything by default."
     required: true
     default: ".*"
+  body-regex:
+    description: "Regex to ensure PR body matches. Allows anything by default."
+    required: true
+    default: ".*"
   on-failed-regex-create-review:
     description:
-      "Whether the action should create a PR review & comment when the regex
+      "Whether the action should create a PR review & comment when the title regex
+      doesn't match."
+    required: false
+    default: true
+  on-failed-body-regex-create-review:
+    description:
+      "Whether the action should create a PR review & comment when the body regex
       doesn't match."
     required: false
     default: true
   on-failed-regex-comment:
     description:
-      "Comment for the bot to post on PRs that fail the regex. Use %regex% to
+      "Comment for the bot to post on PRs that fail the title regex. Use %regex% to
       reference regex."
     required: false
     default: "PR title failed to match %regex%"
+  on-failed-body-regex-comment:
+    description:
+      "Comment for the bot to post on PRs that fail the body regex. Use %regex% to
+      reference regex."
+    required: false
+    default: "PR body failed to match %regex%"
   on-failed-regex-fail-action:
-    description: "Whether the action should fail when the regex doesn't match."
+    description: "Whether the action should fail when the title regex doesn't match."
+    required: false
+    default: false
+  on-failed-body-regex-fail-action:
+    description: "Whether the action should fail when the body regex doesn't match."
     required: false
     default: false
   on-failed-regex-request-changes:
+    description:
+      "Whether the action should request changes or just provide a comment."
+    required: false
+    default: true
+  on-failed-body-regex-request-changes:
     description:
       "Whether the action should request changes or just provide a comment."
     required: false
