@@ -43,10 +43,10 @@ async function run() {
     else {
         if (onFailedRegexCreateReview) {
             console.log(`PR title matches regex, dismissing any existing reviews`);
-            await dismissReview(pullRequest);
             if (onSucceededRegexMinimizeComment) {
                 await minimizeReview(pullRequest);
             }
+            await dismissReview(pullRequest);
         }
     }
 }
