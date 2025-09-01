@@ -48,10 +48,10 @@ export async function run(): Promise<void> {
     if (onFailedRegexCreateReview) {
       // Title is now valid, dismiss any existing review
       console.log(`PR title matches regex, dismissing any existing reviews`);
-      await dismissReview(pullRequest);
       if (onSucceededRegexMinimizeComment) {
         await minimizeReview(pullRequest);
       }
+      await dismissReview(pullRequest);
     }
   }
 }
