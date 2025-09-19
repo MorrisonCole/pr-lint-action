@@ -1261,12 +1261,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.18.0":
-  version: 22.18.0
-  resolution: "@types/node@npm:22.18.0"
+"@types/node@npm:22.18.6":
+  version: 22.18.6
+  resolution: "@types/node@npm:22.18.6"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/02cce4493eee8408e66e76fcad164f33c0600ed0854ad08e5519a76a06402da5b589b278cf71bc975c9e014f2668bdf758bc3be7fed63bdbfd0900495372797c
+  checksum: 10c0/7ba190da2e64e56c59270661af8cd682c830a1375b6f965ab153be90baabfdaa867aa1d63f87b42de80956996d46dfe1cf93ecefe982d9a16e485b6756949f9a
   languageName: node
   linkType: hard
 
@@ -3928,7 +3928,7 @@ __metadata:
   dependencies:
     "@actions/core": "npm:1.11.1"
     "@actions/github": "npm:6.0.1"
-    "@types/node": "npm:22.18.0"
+    "@types/node": "npm:22.18.6"
     "@typescript-eslint/eslint-plugin": "npm:8.41.0"
     "@typescript-eslint/parser": "npm:8.41.0"
     "@vercel/ncc": "npm:0.38.4"
