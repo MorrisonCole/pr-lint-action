@@ -24,28 +24,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@actions/github@npm:6.0.1":
-  version: 6.0.1
-  resolution: "@actions/github@npm:6.0.1"
+"@actions/github@npm:7.0.0":
+  version: 7.0.0
+  resolution: "@actions/github@npm:7.0.0"
   dependencies:
-    "@actions/http-client": "npm:^2.2.0"
+    "@actions/http-client": "npm:^3.0.1"
     "@octokit/core": "npm:^5.0.1"
     "@octokit/plugin-paginate-rest": "npm:^9.2.2"
     "@octokit/plugin-rest-endpoint-methods": "npm:^10.4.0"
     "@octokit/request": "npm:^8.4.1"
     "@octokit/request-error": "npm:^5.1.1"
     undici: "npm:^5.28.5"
-  checksum: 10c0/eaa4109eb1c6ccda5d0c261c4401b8d8ebf0b3f871eb553e1e7a53b86455ad0a7dc7f443c8351aba4fbad979070511f7f86ca84a9056449ef053066cfdb3576b
+  checksum: 10c0/830039821d00efec8d0899c0b6ccd7e7ae27ea5dee50ff6d6277f4e19e582fa00576539df64a0b970211973f80792cff85727f3a3a4b53366ff5194209fe5c60
   languageName: node
   linkType: hard
 
-"@actions/http-client@npm:^2.0.1, @actions/http-client@npm:^2.2.0":
+"@actions/http-client@npm:^2.0.1":
   version: 2.2.3
   resolution: "@actions/http-client@npm:2.2.3"
   dependencies:
     tunnel: "npm:^0.0.6"
     undici: "npm:^5.25.4"
   checksum: 10c0/13141b66a42aa4afd8c50f7479e13a5cdb5084ccb3c73ec48894b8029743389a3d2bf8cdc18e23fb70cd33995740526dd308815613907571e897c3aa1e5eada6
+  languageName: node
+  linkType: hard
+
+"@actions/http-client@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@actions/http-client@npm:3.0.1"
+  dependencies:
+    tunnel: "npm:^0.0.6"
+    undici: "npm:^5.28.5"
+  checksum: 10c0/01c48d6c47225168575630b693ec60bc75fb6e96b7ff244b365fa40915f0e33f656fd7bc5c5d0d96a92727715fb905cb1d4287e6f38fd1f70271fe174de5b0ce
   languageName: node
   linkType: hard
 
@@ -3911,7 +3921,7 @@ __metadata:
   resolution: "pr-lint-action@workspace:."
   dependencies:
     "@actions/core": "npm:1.11.1"
-    "@actions/github": "npm:6.0.1"
+    "@actions/github": "npm:7.0.0"
     "@types/node": "npm:24.10.0"
     "@typescript-eslint/eslint-plugin": "npm:8.46.3"
     "@typescript-eslint/parser": "npm:8.46.3"
