@@ -63,7 +63,7 @@ jobs:
 
 ## Changelog
 
-### 1.7.2
+### v1.7.2
 
 - Upgrade Node from 20 -> 24
 
