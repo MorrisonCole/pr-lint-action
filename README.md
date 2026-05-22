@@ -63,6 +63,10 @@ jobs:
 
 ## Changelog
 
+### v1.7.2
+
+- Upgrade Node from 20 -> 24
+
 ### v1.7.1
 
 - Upgrade Node from 16 -> 20 ([thanks @sirLisko](https://github.com/MorrisonCole/pr-lint-action/pull/735)! 🙏).
